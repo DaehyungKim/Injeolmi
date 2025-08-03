@@ -42,7 +42,7 @@ Express.js + Next.js + PostgreSQL
 psql -U postgres
 
 # 데이터베이스 생성
-CREATE DATABASE board_db;
+CREATE DATABASE [데이터베이스명];
 
 # 종료
 \q
