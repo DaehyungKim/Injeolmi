@@ -56,6 +56,7 @@ const Tiptap = ( {id}: {id:string}) => {
         extensions: [StarterKit, ResizableImage.configure({
         defaultWidth: 200,
         defaultHeight: 200,
+        maxWidth: 730,
     }),],
         immediatelyRender: false, // 렌더링 최적화를 위해 즉시 렌더링을 비활성화
     })
