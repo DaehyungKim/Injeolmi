@@ -1,7 +1,7 @@
 import axios, {InternalAxiosRequestConfig } from 'axios';
 import { API_SERVER_HOST } from './config';
 
-// 서버 사이드에서는 직접 백엔드 서버로, 클라이언트 사이드에서는 프록시 사용
+
 const baseURL = typeof window === 'undefined' ? API_SERVER_HOST : '';
 
 const client = axios.create({
