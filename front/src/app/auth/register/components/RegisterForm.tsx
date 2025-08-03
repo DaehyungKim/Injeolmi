@@ -48,7 +48,7 @@ const RegisterForm = () => {
         if (!newPassword) {
             setPasswordError('비밀번호를 입력해주세요.');
         } else if (!(hasNumber && hasLowercase && hasUppercase && hasSpecialChar && isLongEnough)) {
-            setPasswordError('비밀번호는 영문 대소문자, 숫자, 특수문자를 포함해 8자 이상이어야 합니다.');
+            setPasswordError('비밀번호는 영문 대소문자, 숫자, 특수문자를 포함해\n8자 이상이어야 합니다.');
         } else {
             setPasswordError(''); 
         }
@@ -97,12 +97,14 @@ const RegisterForm = () => {
                 });
             
         } else {
-            console.log('폼 제출 실패: 유효하지 않은 입력');
+            alert('입력한 정보를 확인해주세요.');
         }
     };
 
     return (
-        <form className={styles['register-form']} noValidate onSubmit={handleSubmit}>
+        <div className={styles['register-container']}>
+            <h1>Please <span className={styles.special}>Register</span></h1>
+            <form className={styles['register-form']} noValidate onSubmit={handleSubmit}>
             <div>
                 <div className={styles['input-wrapper']}>
                     <input
@@ -146,20 +148,20 @@ const RegisterForm = () => {
                         <span>r</span>
                         <span>d</span>
                     </label>
+                    {showPasswordError && (
+                        <span className={styles['error-message']}>{passwordError}</span>
+                    )}
                     {password.length > 0 && (
-                        <>
-                            {showPasswordError && (
-                                <span className={styles['error-message']}>{passwordError}</span>
-                            )}
-                            <div className={`${styles['strength-meter']} ${styles[strengthInfo.className]}`}>
-                                {strengthInfo.message}
-                            </div>
-                        </>
+                        <div className={`${styles['strength-meter']} ${styles[strengthInfo.className]}`}>
+                            {strengthInfo.message}
+                        </div>
                     )}
                 </div>
             </div>
             <button className={styles.button} type="submit">Register</button>
         </form>
+        </div>
+        
         
     );
 };
