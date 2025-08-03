@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+    background-color: #f8f9fa;
+}
+
+html {
+    font-family: sans-serif;
+    font-size: 14px;
+}

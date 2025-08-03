@@ -1,0 +1,214 @@
+.register-form {
+    margin: 0 auto;
+    max-width: 400px;
+    margin-top: 50px;
+}
+
+.input-wrapper {
+    position: relative;
+    min-height: 130px;
+}
+
+.register-form>div {
+    position: relative;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    min-height: 70px;
+}
+
+.register-form label {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    pointer-events: none;
+}
+
+.register-form label span {
+    display: inline-block;
+    font-size: 18px;
+    min-width: 5px;
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.input {
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid black;
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    font-size: 18px;
+    color: #000;
+}
+
+.input:focus {
+    outline: 0;
+    border-bottom-color: crimson;
+}
+
+.input:focus + label span,
+.input:valid + label span {
+    color: crimson;
+    transform: translateY(-30px);
+}
+
+.input:not(:placeholder-shown) + label span {
+    color: crimson;
+    transform: translateY(-30px);
+}
+
+.input:focus + label span:nth-child(1),
+.input:valid + label span:nth-child(1),
+.input:not(:placeholder-shown) + label span:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.input:focus + label span:nth-child(2),
+.input:valid + label span:nth-child(2),
+.input:not(:placeholder-shown) + label span:nth-child(2) {
+    transition-delay: 0.05s;
+}
+
+.input:focus + label span:nth-child(3),
+.input:valid + label span:nth-child(3),
+.input:not(:placeholder-shown) + label span:nth-child(3) {
+    transition-delay: 0.1s;
+}
+
+.input:focus + label span:nth-child(4),
+.input:valid + label span:nth-child(4),
+.input:not(:placeholder-shown) + label span:nth-child(4) {
+    transition-delay: 0.15s;
+}
+
+.input:focus + label span:nth-child(5),
+.input:valid + label span:nth-child(5),
+.input:not(:placeholder-shown) + label span:nth-child(5) {
+    transition-delay: 0.2s;
+}
+
+.input:focus + label span:nth-child(6),
+.input:valid + label span:nth-child(6),
+.input:not(:placeholder-shown) + label span:nth-child(6) {
+    transition-delay: 0.25s;
+}
+
+.input:focus + label span:nth-child(7),
+.input:valid + label span:nth-child(7),
+.input:not(:placeholder-shown) + label span:nth-child(7) {
+    transition-delay: 0.3s;
+}
+
+.input:focus + label span:nth-child(8),
+.input:valid + label span:nth-child(8),
+.input:not(:placeholder-shown) + label span:nth-child(8) {
+    transition-delay: 0.35s;
+}
+
+.invalid-input {
+    border-color: #d93025 !important;
+    animation: shake 300ms;
+}
+
+@keyframes shake {
+    25% {
+        transform: translateX(4px);
+    }
+
+    50% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+
+.error-message {
+    color: #d93025;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+
+.strength-meter {
+    font-size: 13px;
+    margin-top: 5px;
+    height: 20px;
+    transition: color 300ms;
+}
+
+.strength-weak {
+    color: #d93025;
+}
+
+.strength-medium {
+    color: #f57c00;
+}
+
+.strength-strong {
+    color: #0f9d58;
+}
+
+.button {
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    background: crimson;
+    padding: 15px;
+    font-family: inherit;
+    font-size: 16px;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.button:focus {
+    outline: 0;
+}
+
+.button:active{
+    transform: scale(0.98);
+}
+
+/* 자동완성 모든 상태에서 글씨 크기 강제 고정 */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-text-fill-color: black !important;
+    background-color: transparent !important;
+    font-size: 18px !important;
+    padding: 15px 0 !important;
+    line-height: 1.2 !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
+}
+.input:-webkit-autofill::first-line {
+    font-size: 18px !important;
+
+}
+
+/* 자동완성 드롭다운 스타일 override */
+.input::-webkit-input-placeholder {
+    font-size: 18px !important;
+}
+
+.input::placeholder {
+    font-size: 18px !important;
+}
+
+/* 자동완성 시 모든 transition 완전 차단 */
+.input:-webkit-autofill {
+    -webkit-transition: all 0s 0s !important;
+    transition: all 0s 0s !important;
+    -webkit-animation: none !important;
+    animation: none !important;
+}
+
+.input-wrapper {
+    min-width: 130px;
+}

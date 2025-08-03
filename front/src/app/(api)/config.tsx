@@ -1,0 +1,3 @@
+export const API_SERVER_HOST = process.env.NEXT_PUBLIC_API_SERVER_HOST!;
+export const API_BOARD_ENDPOINT = process.env.NEXT_PUBLIC_API_BOARD!;
+export const PREFIX = API_SERVER_HOST + API_BOARD_ENDPOINT;

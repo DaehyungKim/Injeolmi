@@ -1,0 +1,13 @@
+import multer from 'multer';
+import { v4 as uuidv4 } from 'uuid';
+
+
+const storage = multer.diskStorage({
+  destination: 'public/uploads/guest-board/image/',
+  filename: (req, file, cb) => {
+    const ext = file.originalname.split('.').pop();
+    const basename = uuidv4();
+    cb(null, `${basename}.${ext}`);
+  }
+});
+export const upload = multer({ storage });
