@@ -9,7 +9,7 @@ Express.js + Next.js + PostgreSQL
 - **TypeScript**
 - **PostgreSQL** (데이터베이스)
 - **TypeORM** (ORM)
-- **JWT** (인증)
+- **JWT** (인증, httponly)
 
 ### Frontend (Next.js)
 - **Next.js 15**
