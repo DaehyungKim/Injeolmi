@@ -28,7 +28,7 @@
   border: 1px solid lightgray;
 }
 
-.boardTable tr {
+.boardTable tbody tr {
   cursor: pointer;
 }
 
