@@ -261,7 +261,7 @@ export async function generateStaticParams() {
 
 ### NextJS의 라우팅 방식
 
-Next.js 13+ App Router는 파일 시스템 기반의 라우팅을 사용합니다.
+Next.js 13+ App Router는 파일 시스템 기반의 라우팅을 사용
 
 #### 📁 기본 라우팅 구조
 
@@ -292,8 +292,7 @@ src/app/
 
 #### 🔧 특수 폴더명 (괄호 폴더)
 
-Next.js에서 괄호로 감싼 폴더는 **라우팅에 영향을 주지 않는** 조직화 폴더입니다.
-
+Next.js에서 괄호로 감싼 폴더는 **라우팅에 영향을 주지 않는** 조직화 폴더
 ##### 📂 현재 프로젝트의 괄호 폴더들
 
 ```
