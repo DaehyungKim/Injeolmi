@@ -85,7 +85,7 @@ const Tiptap = () => {
                 <p>제목</p>
                 <input
                     type="text"
-                    className="border p-2 w-full mb-4"
+                    className={styles.input}
                     placeholder="제목을 입력하세요"
                     value={form.title}
                     onChange={(e) => setForm({ ...form, title: e.target.value })}
@@ -95,7 +95,7 @@ const Tiptap = () => {
                 <p>작성자</p>
                 <input
                     type="text"
-                    className="border p-2 w-full mb-4"
+                    className={styles.input}
                     placeholder="작성자를 입력하세요"
                     value={form.author}
                     onChange={(e) => setForm({ ...form, author: e.target.value })}
@@ -103,7 +103,7 @@ const Tiptap = () => {
                 <p>비밀번호</p>
                 <input
                     type="password"
-                    className="border p-2 w-full mb-4"
+                    className={styles.input}
                     placeholder="비밀번호를 입력하세요"
                     value={form.password}
                     onChange={(e) => setForm({ ...form, password: e.target.value })}

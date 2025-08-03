@@ -152,7 +152,7 @@ const Tiptap = ( {id}: {id:string}) => {
                 <p>작성자</p>
                 <input
                     type="text"
-                    className="border p-2 w-full mb-4"
+                    className={styles.input}
                     placeholder="작성자를 입력하세요"
                     value={form.author}
                     onChange={(e) => setForm({ ...form, author: e.target.value })}

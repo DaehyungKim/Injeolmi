@@ -5,6 +5,13 @@
     padding: 20px;
 }
 
+.input {
+    border: 1px solid #d1d5db;
+    padding: 0.5rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
 .tiptap ol {
     list-style-type: decimal;
     padding-left: 2em;
