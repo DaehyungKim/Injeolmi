@@ -17,6 +17,99 @@
     margin-bottom: 1rem;
 }
 
+/* 게시글 내용 스타일 */
+.detail-content h1 {
+    font-size: 1.4rem;
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.detail-content h2 {
+    font-size: 1.2rem;
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.detail-content h3 {
+    font-size: 1.1rem;
+    margin-top: 2.5rem;
+    line-height: 1.1;
+}
+
+.detail-content h4 {
+    font-size: 1.05rem;
+    margin-top: 2.5rem;
+    line-height: 1.1;
+}
+
+.detail-content h5 {
+    font-size: 1.02rem;
+    margin-top: 2.5rem;
+    line-height: 1.1;
+}
+
+.detail-content h6 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    line-height: 1.1;
+}
+
+.detail-content code {
+    background-color: #f3f4f6;
+    border-radius: 0.4rem;
+    color: #1f2937;
+    font-size: 0.85rem;
+    padding: 0.25em 0.3em;
+}
+
+.detail-content pre {
+    background: #1f2937;
+    border-radius: 0.5rem;
+    color: #f9fafb;
+    font-family: 'JetBrainsMono', monospace;
+    margin: 1.5rem 0;
+    padding: 0.75rem 1rem;
+}
+
+.detail-content pre code {
+    background: none;
+    color: inherit;
+    font-size: 0.8rem;
+    padding: 0;
+}
+
+.detail-content blockquote {
+    border-left: 3px solid #d1d5db;
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+}
+
+.detail-content hr {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 2rem 0;
+}
+
+.detail-content ul,
+.detail-content ol {
+    padding: 0 1rem;
+    margin: 1.25rem 1rem 1.25rem 0.4rem;
+    list-style-type: disc;
+}
+
+.detail-content ol {
+    list-style-type: decimal;
+}
+
+.detail-content ul li p,
+.detail-content ol li p {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
 .detail-actions {
     margin-top: 1rem;
 }

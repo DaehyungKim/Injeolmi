@@ -160,7 +160,7 @@ const Tiptap = ( {id}: {id:string}) => {
             </div>
         <MenuBar editor={editor} addImage={addImage} />
         
-        <EditorContent editor={editor} className="tiptap" />
+        <EditorContent editor={editor} className={styles.tiptap} />
         <button className={styles.create} onClick={handleSubmit}>
             글수정
         </button>

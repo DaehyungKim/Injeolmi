@@ -111,7 +111,7 @@ const Tiptap = () => {
             </div>
         <MenuBar editor={editor} addImage={addImage}  />
         
-        <EditorContent editor={editor} className="tiptap" />
+        <EditorContent editor={editor} className={styles.tiptap} />
         <button className={styles.create} onClick={handleSubmit}>
             글작성
         </button>
