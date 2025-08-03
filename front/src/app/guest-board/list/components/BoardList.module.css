@@ -1,5 +1,9 @@
 
 
+.container {
+  padding: 0.5rem;
+}
+
 .boardTable {
   border: 1px solid lightgray;
   margin: 0 auto;
@@ -48,4 +52,12 @@
   pointer-events: none; 
   cursor: default;      
   opacity: 0.5;
+  color: #9ca3af;
+}
+
+.disabled {
+  pointer-events: none; 
+  cursor: default;      
+  opacity: 0.5;
+  color: #9ca3af;
 }

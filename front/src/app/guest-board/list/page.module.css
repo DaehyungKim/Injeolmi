@@ -1,0 +1,11 @@
+.createButtonWrapper {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.createButton {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    background-color: #3b82f6;
+    color: white;
+}

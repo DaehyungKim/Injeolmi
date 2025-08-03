@@ -2,8 +2,7 @@ import BoardList from "./components/BoardList";
 import { getList } from "@/app/(api)/guestBoardApi";
 import Link from "next/link";
 import { iBoardItem } from "@/app/(type)/guest-board/board";
-
-
+import styles from './page.module.css';
 
 const List = async ( { searchParams } : {searchParams: {page?: string} }) => {
     const _searchParams = await Promise.resolve(searchParams);
@@ -14,8 +13,8 @@ const List = async ( { searchParams } : {searchParams: {page?: string} }) => {
     return (
         <div>
             <BoardList list={list} page={page} lastPage={lastPage} />
-            <div className="text-center mt-4">
-                <button className="border p-2 bg-blue-500 text-white">
+            <div className={styles.createButtonWrapper}>
+                <button className={styles.createButton}>
                     <Link href="/guest-board/create">글작성</Link>
                 </button>
             </div>

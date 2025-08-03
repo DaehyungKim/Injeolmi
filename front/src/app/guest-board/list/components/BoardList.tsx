@@ -83,7 +83,7 @@ const BoardList = ({list, page, lastPage}: iBoardListProps) => {
 
 
     return (
-    <div className="p-2">
+    <div className={styles.container}>
       <table className={`${styles.boardTable} ${isLoading ? styles.loading : ''}`}>
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
@@ -117,7 +117,7 @@ const BoardList = ({list, page, lastPage}: iBoardListProps) => {
       <div className={styles.pagination}>
         <Link
           href={`/guest-board/list?page=${currentPage - 1}`}
-          className={currentPage <= 1 ? 'disabled' : ''}
+          className={currentPage <= 1 ? styles.disabled : ''}
           scroll={false}
         >
           이전
@@ -125,7 +125,7 @@ const BoardList = ({list, page, lastPage}: iBoardListProps) => {
         <span>{currentPage}</span>
         <Link
           href={`/guest-board/list?page=${currentPage + 1}`}
-          className={currentPage >= csrLastPage ? 'disabled' : ''}
+          className={currentPage >= csrLastPage ? styles.disabled : ''}
           scroll={false}
         >
           다음
