@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getCurrentUser, logout, getCSRFToken } from '@/app/(api)/authApi';
+import { getCurrentUser, logout } from '@/app/(api)/authApi';
 
 
 interface AuthState {
@@ -16,10 +16,10 @@ const initialState: AuthState = {
     csrfToken: null,
 };
 
-export const CSRFToken = createAsyncThunk('/auth/csrfToken', async () => {
-    const token = await getCSRFToken();
-    return token;
-})
+// export const CSRFToken = createAsyncThunk('/auth/csrfToken', async () => {
+//     const token = await getCSRFToken();
+//     return token;
+// })
 
 export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
     const user = await getCurrentUser();
@@ -55,10 +55,7 @@ const authSlice = createSlice({
                 state.user = null;
                 state.isAuthenticated = false;
             })
-            .addCase(CSRFToken.fulfilled, (state, action) => {
-                console.log('CSRF Token fetched:', action.payload);
-                state.csrfToken = action.payload.csrfToken;
-            })
+           
         },
     });
 

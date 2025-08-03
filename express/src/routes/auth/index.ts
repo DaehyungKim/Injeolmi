@@ -26,6 +26,6 @@ authRouter.post('/logout', authController.logout);
 // Get /api/auth/me - 사용자 정보 조회
 authRouter.get('/me', authenticateToken, authController.getMe);
 
-authRouter.get('/csrf-token', authController.getCsrfToken);
+// authRouter.get('/csrf-token', authController.getCsrfToken);
 
 export default authRouter;

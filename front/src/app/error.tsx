@@ -1,9 +1,7 @@
 'use client';
 
 const Error = ({error, reset} : {error: Error, reset: () => void}) => {
-    console.log("넌 뭐여" + error.name);    
-    console.log("넌 뭐고" + error.message); 
-    console.log("니는 뭔데" + error.stack);
+    
 
     return (
         <div>

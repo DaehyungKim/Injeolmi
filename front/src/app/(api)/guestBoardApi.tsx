@@ -1,10 +1,8 @@
 import axios from 'axios';
 import { iCreate, iList, iUpdate } from '@/app/(type)/guest-board/board';
-import { API_BOARD_ENDPOINT  } from './config';
 import client from './client'; 
 
-const PREFIX = API_BOARD_ENDPOINT + '/guest-board';
-
+const PREFIX = '/api/guest-board';  
 
 export const Create = async ( param : iCreate ) => {
     try {

@@ -3,7 +3,7 @@ import logger from 'jet-logger';
 import AuthService from '@src/services/auth/authService';
 import jwt from 'jsonwebtoken';
 import createError from 'http-errors';
-import { generateCsrfToken } from '@src/server';
+// import { generateCsrfToken } from '@src/server';
 
 
 class AuthController {
@@ -37,7 +37,7 @@ class AuthController {
             res.cookie('accessToken', accessToken, {
                 httpOnly: true,
                 secure: true,
-                sameSite: 'none',
+                sameSite: 'lax',
                 maxAge: 15 * 60 * 1000 
             });
 
@@ -68,7 +68,7 @@ class AuthController {
             res.clearCookie('accessToken', {
                 httpOnly: true,
                 secure: true,
-                sameSite: 'none',
+                sameSite: 'lax',
                 path: '/',
             });
             logger.info('사용자 로그아웃 성공');
@@ -95,14 +95,14 @@ class AuthController {
     }
 
     // CSRF 토큰 제공 엔드포인트
-    public async getCsrfToken(req: Request, res: Response): Promise<void> {
-        const csrfToken = generateCsrfToken(req, res);
-        logger.info('CSRF 토큰 요청:' + csrfToken);
-        res.json({
-            csrfToken: csrfToken,
-            message: 'CSRF 토큰을 성공적으로 가져왔습니다'
-    });
-    }
+    // public async getCsrfToken(req: Request, res: Response): Promise<void> {
+    //     const csrfToken = generateCsrfToken(req, res);
+    //     logger.info('CSRF 토큰 요청:' + csrfToken);
+    //     res.json({
+    //         csrfToken: csrfToken,
+    //         message: 'CSRF 토큰을 성공적으로 가져왔습니다'
+    // });
+    // }
 }
 
 // 클래스의 인스턴스를 내보내서 사용 (싱글톤)

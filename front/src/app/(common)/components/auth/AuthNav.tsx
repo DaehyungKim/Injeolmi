@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '@/app/(store)/store';
-import { checkAuth, logoutUser, CSRFToken } from '@/app/(store)/slice/authSlice';
+import { checkAuth, logoutUser } from '@/app/(store)/slice/authSlice';
 import Link from 'next/link';
 import styles from './AuthNav.module.css';
 
@@ -14,7 +14,7 @@ const AuthNav = () => {
 
     useEffect(() => {
         dispatch(checkAuth());
-        dispatch(CSRFToken());
+
 
     }, [dispatch]);
 

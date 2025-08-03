@@ -1,9 +1,8 @@
-import { API_BOARD_ENDPOINT  } from './config';
 import client from './client'; 
 import { iRegister } from '@/app/(type)/auth/auth';
 import axios from 'axios'; 
 
-const PREFIX = API_BOARD_ENDPOINT + '/auth';
+const PREFIX = '/api/auth';  // Express의 /api 경로에 맞춤
 
 export const registerUser = async (formData: iRegister) => {
     try {
@@ -49,13 +48,13 @@ export const logout = async () => {
     }
 }
 
-export const getCSRFToken = async () => {
-    try {
-        const response = await client.get(`${PREFIX}/csrf-token`);
-        return response.data;
-    } catch (error) {
-        if (axios.isAxiosError(error)) {
-            throw new Error(error.response?.data.error);
-        }
-    }
-}
+// export const getCSRFToken = async () => {
+//     try {
+//         const response = await client.get(`${PREFIX}/csrf-token`);
+//         return response.data;
+//     } catch (error) {
+//         if (axios.isAxiosError(error)) {
+//             throw new Error(error.response?.data.error);
+//         }
+//     }
+// }
