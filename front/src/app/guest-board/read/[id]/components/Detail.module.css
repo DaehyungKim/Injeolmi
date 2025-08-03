@@ -145,12 +145,12 @@
 
 .detail-wrapper{
     width: 100%;
-    max-width: 800px;
+    max-width: 760px;
     margin: 0 auto;
-    padding: 20px;
     border: 1px solid #e5e7eb;
     border-radius: 0.375rem;
     margin-top: 3rem;
+    padding: 1rem;
 }
 
 p:empty::before {
