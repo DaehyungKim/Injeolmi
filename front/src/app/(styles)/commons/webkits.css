@@ -1,0 +1,29 @@
+@layer utilities {
+
+    /* 자동완성 스타일 */
+    .form-input:-webkit-autofill,
+    .form-input:-webkit-autofill:hover,
+    .form-input:-webkit-autofill:focus,
+    .form-input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+        -webkit-text-fill-color: black !important;
+        background-color: transparent !important;
+        font-size: 18px !important;
+        padding: 15px 0 !important;
+        line-height: 1.2 !important;
+        height: 48px !important;
+        min-height: 48px !important;
+        max-height: 48px !important;
+    }
+
+    .form-input:-webkit-autofill::first-line {
+        font-size: 18px !important;
+    }
+
+    .form-input:-webkit-autofill {
+        -webkit-transition: all 0s 0s !important;
+        transition: all 0s 0s !important;
+        -webkit-animation: none !important;
+        animation: none !important;
+    }
+}

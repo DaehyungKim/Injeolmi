@@ -1,0 +1,111 @@
+@layer components {
+
+
+    
+
+    .form-input {
+        @apply bg-transparent border-0 border-b-2 border-black block w-full py-4 px-0 text-lg text-black focus:outline-none focus:border-[var(--color-primary)] placeholder-transparent;
+    }
+
+
+    .form-label {
+        @apply absolute top-4 left-0 pointer-events-none;
+    }
+
+    .form-label span {
+        @apply inline-block text-lg min-w-[5px];
+        transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+
+    
+
+    /* 라벨 애니메이션 */
+    .form-input:focus+.form-label span,
+    .form-input:not(:placeholder-shown)+.form-label span {
+        @apply text-[var(--color-primary)];
+        transform: translateY(-30px);
+    }
+
+
+
+    .form-input:focus+.error-label span,
+    .form-input:not(:placeholder-shown)+.error-label span {
+        @apply text-red-600;
+        transform: translateY(-30px);
+
+    }
+    .error-label span {
+        @apply text-red-600;
+        transition: none !important;
+        transform: translateY(-30px);
+    }
+    .form-input:not(:placeholder-shown) + .form-label:not(.error-label) span {
+        transition: none !important;
+    }
+
+}
+
+@layer utilities {
+
+    /* 흔들림 애니메이션 */
+    @keyframes shake {
+        25% {
+            transform: translateX(4px);
+        }
+
+        50% {
+            transform: translateX(-4px);
+        }
+
+        75% {
+            transform: translateX(4px);
+        }
+    }
+
+    .shake-target {
+        animation: shake 300ms;
+    }
+
+    /* 글자별 지연 애니메이션 */
+    .form-input:focus + .form-label span:nth-child(1),
+    .form-input:not(:placeholder-shown) + .form-label span:nth-child(1) {
+        transition-delay: 0s;
+    }
+
+    .form-input:focus+.form-label span:nth-child(2),
+    .form-input:not(:placeholder-shown)+.form-label span:nth-child(2) {
+        transition-delay: 0.05s;
+    }
+
+    .form-input:focus+.form-label span:nth-child(3),
+    .form-input:not(:placeholder-shown)+.form-label span:nth-child(3) {
+        transition-delay: 0.1s;
+    }
+
+    .form-input:focus+.form-label span:nth-child(4),
+    .form-input:not(:placeholder-shown)+.form-label span:nth-child(4) {
+        transition-delay: 0.15s;
+    }
+
+    .form-input:focus+.form-label span:nth-child(5),
+    .form-input:not(:placeholder-shown)+.form-label span:nth-child(5) {
+        transition-delay: 0.2s;
+    }
+
+    .form-input:focus+.form-label span:nth-child(6),
+    .form-input:not(:placeholder-shown)+.form-label span:nth-child(6) {
+        transition-delay: 0.25s;
+    }
+
+    .form-input:focus+.form-label span:nth-child(7),
+    .form-input:not(:placeholder-shown)+.form-label span:nth-child(7) {
+        transition-delay: 0.3s;
+    }
+
+    .form-input:focus+.form-label span:nth-child(8),
+    .form-input:not(:placeholder-shown)+.form-label span:nth-child(8) {
+        transition-delay: 0.35s;
+    }
+
+}

@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@import "./auth/forms.css";
+@import "./commons/webkits.css";
+
+@layer theme {
+    :root {
+        --font-sans: system-ui, -apple-system, sans-serif;
+        --font-size-base: 14px;
+        --color-primary: #BCA9E0;
+    }
+}
+
+@layer base {
+    html {
+        font-family: var(--font-sans);
+        font-size: var(--font-size-base);
+    }
+}
+
+@layer components {
+
+
+    /* 네비게이션 */
+    nav {
+        @apply flex justify-center items-center p-4 gap-4 bg-gray-50;
+    }
+}
+
+@layer utilities {
+
+}

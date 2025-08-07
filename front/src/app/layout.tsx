@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import './(styles)/globals.css';
 import Link from "next/link";
 import StoreProvider from "./(store)/StoreProvider";
 import AuthNav from "./(common)/components/auth/AuthNav";

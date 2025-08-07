@@ -1,6 +1,5 @@
 'use client';
 
-import styles from './LoginForm.module.css';
 import { login } from '@/app/(api)/authApi';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,8 +12,6 @@ const LoginForm = () => {
     const [password, setPassword] = useState('');
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
-
-
     const loginhandler = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!email || !password) {
@@ -26,20 +23,30 @@ const LoginForm = () => {
             console.log(response);
             alert('로그인 성공');
             dispatch(checkAuth());
-            router.push('/'); 
+            router.push('/');
         } catch (error) {
             console.error('로그인 실패:', error);
             alert(error instanceof Error ? error.message : '로그인에 실패했습니다.');
         }
     }
-
     return (
-        <div className={styles['login-container']}>
-            <h1>Please <span className={styles.special}>Login</span></h1>
-            <form className={styles['login-form']} noValidate onSubmit={loginhandler}>
-                <div>
-                    <input type="email" id="email" name="email" className={styles.input} placeholder=" " required  value={email} onChange={(e) => setEmail(e.target.value)}/>
-                    <label htmlFor="email">
+        <div className="box-border flex flex-col justify-center items-center m-0 p-20 rounded-md">
+            <h1 className="block text-center mb-10">
+                Please <span className="bg-[var(--color-primary)] px-5 py-1 text-white rounded-sm">Login</span>
+            </h1>
+            <form className="mx-auto w-96 mt-12" noValidate onSubmit={loginhandler}>
+                <div className="relative mb-7 mt-5">
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        className="form-input" 
+                        placeholder=" " 
+                        required  
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <label htmlFor="email" className="form-label">
                         <span>E</span>
                         <span>m</span>
                         <span>a</span>
@@ -47,9 +54,18 @@ const LoginForm = () => {
                         <span>l</span>
                     </label>
                 </div>
-                <div>
-                    <input type="password" id="password" name="password" className={styles.input} placeholder=" " required  value={password} onChange={(e) => setPassword(e.target.value)}/>
-                    <label htmlFor="password">
+                <div className="relative mb-7 mt-5">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        className="form-input" 
+                        placeholder=" " 
+                        required  
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <label htmlFor="password" className="form-label">
                         <span>P</span>
                         <span>a</span>
                         <span>s</span>
@@ -60,9 +76,10 @@ const LoginForm = () => {
                         <span>d</span>
                     </label>
                 </div>
-                <button className={styles.btn}  type="submit">Login</button>
+                <button className="cursor-pointer inline-block w-full bg-[var(--color-primary)] p-4 text-base rounded-md text-white border-0 focus:outline-none active:scale-[0.98] transition-transform;" type="submit">Login</button>
             </form>
         </div>
     )
 }
+
 export default LoginForm;

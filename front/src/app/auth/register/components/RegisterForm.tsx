@@ -1,25 +1,28 @@
 'use client';
 
-import { useState } from 'react';
-import type { ChangeEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { registerUser } from '@/app/(api)/authApi';
-import styles from './RegisterForm.module.css';
 
 // 이메일 정규식
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+// 타입 정의
+interface StrengthInfo {
+    message: string;
+    className: string;
+}
+
 const RegisterForm = () => {
     // 이메일 상태
-    const [email, setEmail] = useState('');
-    const [emailError, setEmailError] = useState('');
+    const [email, setEmail] = useState<string>('');
+    const [emailError, setEmailError] = useState<string>('');
 
     // 비밀번호 상태
-    const [password, setPassword] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [strength, setStrength] = useState(0);
+    const [password, setPassword] = useState<string>('');
+    const [passwordError, setPasswordError] = useState<string>('');
+    const [strength, setStrength] = useState<number>(0);
 
-    
-    const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleEmailChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const newEmail = e.target.value;
         setEmail(newEmail);
 
@@ -29,12 +32,11 @@ const RegisterForm = () => {
         } else if (!EMAIL_REGEX.test(newEmail)) {
             setEmailError('올바른 이메일 형식을 입력해주세요.');
         } else {
-            setEmailError(''); 
+            setEmailError('');
         }
     };
 
-    
-    const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const newPassword = e.target.value;
         setPassword(newPassword);
 
@@ -50,7 +52,7 @@ const RegisterForm = () => {
         } else if (!(hasNumber && hasLowercase && hasUppercase && hasSpecialChar && isLongEnough)) {
             setPasswordError('비밀번호는 영문 대소문자, 숫자, 특수문자를 포함해\n8자 이상이어야 합니다.');
         } else {
-            setPasswordError(''); 
+            setPasswordError('');
         }
 
         // 보안 등급 계산
@@ -59,30 +61,30 @@ const RegisterForm = () => {
         if (hasLowercase && hasUppercase) score++;
         if (isLongEnough) score++;
         if (hasSpecialChar) score++;
-        
-        if (score >= 4) setStrength(3); 
+
+        if (score >= 4) setStrength(3);
         else if (score >= 2) setStrength(2);
         else if (newPassword.length > 0) setStrength(1);
         else setStrength(0);
     };
 
     // 보안 등급 정보 반환
-    const getStrengthInfo = () => {
+    const getStrengthInfo = (): StrengthInfo => {
         switch (strength) {
-            case 1: return { message: '보안 수준: 약함', className: 'strength-weak' };
-            case 2: return { message: '보안 수준: 중간', className: 'strength-medium' };
-            case 3: return { message: '보안 수준: 강함', className: 'strength-strong' };
+            case 1: return { message: '보안 수준: 약함', className: 'text-red-600' };
+            case 2: return { message: '보안 수준: 중간', className: 'text-orange-500' };
+            case 3: return { message: '보안 수준: 강함', className: 'text-green-600' };
             default: return { message: '', className: '' };
         }
     };
 
     const strengthInfo = getStrengthInfo();
     // 에러 상태를 boolean 값으로 변환
-    const showEmailError = !!emailError;
-    const showPasswordError = !!passwordError;
+    const showEmailError: boolean = !!emailError;
+    const showPasswordError: boolean = !!passwordError;
 
     // 폼 제출 핸들러
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
 
         if (!showEmailError && !showPasswordError) {
@@ -92,77 +94,85 @@ const RegisterForm = () => {
                     setEmail('');
                     setPassword('');
                 })
-                .catch((error) => {
+                .catch((error: Error) => {
                     alert(error.message);
                 });
-            
         } else {
             alert('입력한 정보를 확인해주세요.');
         }
     };
 
     return (
-        <div className={styles['register-container']}>
-            <h1>Please <span className={styles.special}>Register</span></h1>
-            <form className={styles['register-form']} noValidate onSubmit={handleSubmit}>
-            <div>
-                <div className={styles['input-wrapper']}>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={handleEmailChange}
-                        className={`${styles.input} ${showEmailError ? styles['invalid-input'] : ''}`}
-                        placeholder=" "
-                        required
-                    />
-                    <label htmlFor="email">
-                        <span>E</span>
-                        <span>m</span>
-                        <span>a</span>
-                        <span>i</span>
-                        <span>l</span>
-                    </label>
-                    {showEmailError && <span className={styles['error-message']}>{emailError}</span>}
+        <div className="box-border flex flex-col justify-center items-center m-0 p-20 rounded-md">
+            <h1 className="block text-center mb-10">
+                Please <span className="bg-[var(--color-primary)] px-5 py-1 text-white rounded-sm">Register</span>
+            </h1>
+            
+            <form className="mx-auto w-96 mt-12" noValidate onSubmit={handleSubmit}>
+                <div className="relative mb-7 mt-5 min-h-[130px]">
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={handleEmailChange}
+                            className={`form-input ${showEmailError ? 'border-red-600 shake-target' : ''}`}
+                            placeholder=" "
+                            required
+                        />
+                        <label htmlFor="email" className={`form-label ${showEmailError ? 'error-label shake-target' : ''}`}>
+                            <span>E</span>
+                            <span>m</span>
+                            <span>a</span>
+                            <span>i</span>
+                            <span>l</span>
+                        </label>
+                        {showEmailError && (
+                            <span className="text-red-600 text-sm mt-1 whitespace-pre-wrap">
+                                {emailError}
+                            </span>
+                        )}
                 </div>
-            </div>
 
-            <div>
-                <div className={styles['input-wrapper']}>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        className={`${styles.input} ${showPasswordError ? styles['invalid-input'] : ''}`}
-                        placeholder=" "
-                        required
-                    />
-                    <label htmlFor="password">
-                        <span>P</span>
-                        <span>a</span>
-                        <span>s</span>
-                        <span>s</span>
-                        <span>w</span>
-                        <span>o</span>
-                        <span>r</span>
-                        <span>d</span>
-                    </label>
-                    {showPasswordError && (
-                        <span className={styles['error-message']}>{passwordError}</span>
-                    )}
-                    {password.length > 0 && (
-                        <div className={`${styles['strength-meter']} ${styles[strengthInfo.className]}`}>
-                            {strengthInfo.message}
-                        </div>
-                    )}
+                <div className="relative mb-7 mt-5 min-h-[130px]">
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            className={`form-input ${showPasswordError ? 'border-red-600 shake-target' : ''}`}
+                            placeholder=" "
+                            required
+                        />
+                        <label htmlFor="password" className={`form-label ${showPasswordError ? 'error-label shake-target' : ''}`}>
+                            <span>P</span>
+                            <span>a</span>
+                            <span>s</span>
+                            <span>s</span>
+                            <span>w</span>
+                            <span>o</span>
+                            <span>r</span>
+                            <span>d</span>
+                        </label>
+                        {showPasswordError && (
+                            <span className="text-red-600 text-sm mt-1 whitespace-pre-wrap">
+                                {passwordError}
+                            </span>
+                        )}
+                        {password.length > 0 && (
+                            <div className={`text-sm mt-1 h-5 transition-colors duration-300 ${strengthInfo.className}`}>
+                                {strengthInfo.message}
+                            </div>
+                        )}
                 </div>
-            </div>
-            <button className={styles.button} type="submit">Register</button>
-        </form>
+
+                <button 
+                    className="cursor-pointer inline-block w-full bg-[var(--color-primary)] p-4 text-base rounded-md text-white border-0 focus:outline-none active:scale-[0.98] transition-transform;"
+                    type="submit"
+                >
+                    Register
+                </button>
+            </form>
         </div>
-        
-        
     );
 };
 
