@@ -1,11 +1,11 @@
 "use client";
 
-import { iBoardItem } from "@/app/(type)/guest-board/board";
+import { iBoardItem } from "@/features/guest-board/types";
 import DOMPurify from "dompurify";
 import { useState, useEffect } from "react";
-import Modal from "@/app/(common)/components/ui/Modal";
+import Modal from "@/components/ui/Modal";
 import styles from "./Detail.module.css";
-import { deletePost } from "@/app/(api)/guestBoardApi";
+import { deletePost } from "@/features/guest-board/api/boardApi";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 

@@ -1,22 +1,19 @@
-import { getPost } from "@/app/(api)/guestBoardApi";
-import Detail from "./components/Detail";
+import { getPost } from '@/features/guest-board/api/boardApi';
+import { BoardDetail } from '@/features/guest-board/components/BoardDetail';
 
-interface props {
-    params: {
-    id: string;
-    };
+interface ReadPageProps {
+  params: { id: string };
 }
 
-const Read = async ({ params }: props) => {
-    const { id } = await Promise.resolve(params);
-    const response = await getPost(id);
-    console.log(response);
+const ReadPage = async ({ params }: ReadPageProps) => {
+  const { id } = await Promise.resolve(params);
+  const response = await getPost(id);
 
-    return (
+  return (
     <div>
-        <Detail detail={response} />
+      <BoardDetail initialDetail={response} />
     </div>
-    );
+  );
 };
 
-export default Read;
+export default ReadPage;
