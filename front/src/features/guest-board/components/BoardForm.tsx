@@ -8,6 +8,8 @@ import { imageUpload } from '../api/boardApi';
 import { MenuBar } from './MenuBar';
 import 'tiptap-extension-resizable-image/styles.css';
 import type { iCreate, iUpdate, GuestBoardFormProps } from '../types';
+import { Video } from '../utils/video';
+
 
 const API_SERVER_HOST = process.env.NEXT_PUBLIC_API_SERVER_HOST!;
 
@@ -19,7 +21,7 @@ export const BoardForm = (props: GuestBoardFormProps) => {
   );
 
   const editor = useEditor({
-    extensions: [StarterKit, ResizableImage.configure({ defaultWidth: 200, defaultHeight: 200, maxWidth: 730 })],
+    extensions: [StarterKit, ResizableImage.configure({ defaultWidth: 200, defaultHeight: 200, maxWidth: 730 }), Video],
     content: props.mode === 'update' ? props.initialData.content : '',
     immediatelyRender: false,
     editorProps: {
@@ -32,7 +34,7 @@ export const BoardForm = (props: GuestBoardFormProps) => {
     },
   });
 
-  const addImage = async () => {
+  const addImage = () => {
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
     fileInput.accept = 'image/*';
@@ -52,6 +54,27 @@ export const BoardForm = (props: GuestBoardFormProps) => {
     };
     fileInput.click();
   };
+
+  const addVideo = () => {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'video/*';
+    fileInput.onchange = async (event) => {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (file && editor) {
+        try {
+          const response = await imageUpload(file);
+          setForm(prev => ({ ...prev, preImages: [...(prev.preImages || []), response.filePath] }));
+          const imageUrl = API_SERVER_HOST + response.filePath;
+          editor?.commands.setVideo(imageUrl);
+        } catch (error) {
+          console.error('Video upload failed:', error);
+          alert(error instanceof Error ? error.message : '비디오 업로드 실패');
+        }
+      }
+    };
+    fileInput.click();
+  }
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -115,7 +138,7 @@ export const BoardForm = (props: GuestBoardFormProps) => {
         )}
       </div>
 
-      <MenuBar editor={editor} addImage={addImage} />
+      <MenuBar editor={editor} addImage={addImage} addVideo={addVideo} />
       <div className="border border-gray-300 rounded-md overflow-hidden">
         <EditorContent editor={editor} />
       </div>

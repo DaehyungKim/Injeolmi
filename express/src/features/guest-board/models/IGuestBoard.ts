@@ -1,4 +1,4 @@
-import { IModel, IModelResponse } from '@src/shared/models';
+import { IModel, IModelResponse } from "@src/core/shared/models";
 
 export interface ICreate extends IModel {
     title: string;

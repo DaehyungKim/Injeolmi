@@ -1,8 +1,8 @@
 import client from '@/api/client';
-import { iRegister } from '@/type/auth/auth';
+import { iRegister } from '@/features/auth/types/auth';
 import axios from 'axios'; 
 
-const PREFIX = '/api/auth';  // Express의 /api 경로에 맞춤
+const PREFIX = '/api/auth'; 
 
 export const registerUser = async (formData: iRegister) => {
     try {
