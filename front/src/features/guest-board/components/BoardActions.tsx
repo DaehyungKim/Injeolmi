@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styles from './BoardDetail.module.css';
 
 
-export const BoardActions = ({ onUpdate, onDelete, currentPage }: { onUpdate: () => void; onDelete: () => void; currentPage: string }) => {
+export const BoardActions = ({ id, onDelete, currentPage }: { id: Number; onDelete: () => void; currentPage: string }) => {
     const baseButtonStyles = "px-4 py-2 font-semibold text-white rounded-md transition-colors focus:outline-none ";
 
     return (
@@ -15,12 +15,13 @@ export const BoardActions = ({ onUpdate, onDelete, currentPage }: { onUpdate: ()
             >
                 목록
             </Link>
-            <button
-                onClick={onUpdate}
+            <Link 
+                href={`/guest-board/update/${id}`}
+                scroll={false}
                 className={`${baseButtonStyles} bg-green-500 hover:bg-green-600 focus:ring-green-500`}
             >
-                수정
-            </button>
+                수정   
+            </Link>
             <button
                 onClick={onDelete}
                 className={`${baseButtonStyles} bg-red-500 hover:bg-red-600 focus:ring-red-500`}

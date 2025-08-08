@@ -9,13 +9,17 @@ import {
   BoardForm,
   type iUpdate
 } from '@/features/guest-board';
+import { use } from 'react';
 
 
-const GuestBoardUpdatePage = ({ params }: { params: { id: string } }) => {
+
+const GuestBoardUpdatePage = ({ params }: { params: Promise<{ id:string }> }) => {
+  const { id } = use(params);
   const [boardItem, setBoardItem] = useState<iUpdate | null>(null);
   const [password, setPassword] = useState("");
   const [showModal, setShowModal] = useState(true);
   const router = useRouter();
+
 
   const loadPost = async () => {
     if (!password) {
@@ -23,7 +27,7 @@ const GuestBoardUpdatePage = ({ params }: { params: { id: string } }) => {
       return;
     }
     try {
-      const response = await getPostForUpdate(Number(params.id), password);
+      const response = await getPostForUpdate(Number(id), password);
       setBoardItem({ ...response, preImages: response.preImages || [] });
       setShowModal(false);
     } catch (error) {
@@ -50,7 +54,7 @@ const GuestBoardUpdatePage = ({ params }: { params: { id: string } }) => {
         password={password}
         setPassword={setPassword}
         onConfirm={loadPost}
-        onCancel={() => router.push(`/guest-board/read/${params.id}`)}
+        onCancel={() => router.push(`/guest-board/read/${id}`)}
       />
     );
   }

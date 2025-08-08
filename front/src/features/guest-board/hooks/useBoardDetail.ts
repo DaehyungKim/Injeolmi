@@ -10,6 +10,9 @@ export const useBoardDetail = (detail: iBoardItem) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [password, setPassword] = useState('');
 
+
+    
+
     const handleUpdate = () => {
         router.push(`/guest-board/update/${detail.id}`);
     };

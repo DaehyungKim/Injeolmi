@@ -19,6 +19,7 @@ export const BoardForm = (props: GuestBoardFormProps) => {
   const [form, setForm] = useState<iCreate | iUpdate>(
     props.mode === 'update' ? props.initialData : { title: '', author: '', password: '', content: '', preImages: [] }
   );
+  
 
   const editor = useEditor({
     extensions: [StarterKit, ResizableImage.configure({ defaultWidth: 200, defaultHeight: 200, maxWidth: 730 }), Video],

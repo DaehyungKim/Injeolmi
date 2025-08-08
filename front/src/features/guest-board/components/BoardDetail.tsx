@@ -24,6 +24,8 @@ export const BoardDetail = ({ initialDetail }: { initialDetail: iBoardItem }) =>
     const searchParams = useSearchParams();
     const currentPage = searchParams.get('page') || "1";
 
+    
+
     return (
         <div className="w-full max-w-[774px] mx-auto mt-12 p-4 border border-gray-200 rounded-md sm:p-6">
             <div>
@@ -38,7 +40,7 @@ export const BoardDetail = ({ initialDetail }: { initialDetail: iBoardItem }) =>
                 <BoardContent content={initialDetail.content} />
             </div>
 
-            <BoardActions onUpdate={handleUpdate} onDelete={openDeleteModal} currentPage={currentPage}/>
+            <BoardActions id={Number(initialDetail.id)} onDelete={openDeleteModal} currentPage={currentPage}/>
 
             {showDeleteModal && (
                 <Modal
