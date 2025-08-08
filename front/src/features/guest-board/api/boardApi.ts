@@ -4,7 +4,7 @@ import client from '../../../api/client';
 
 const PREFIX = '/api/guest-board';  
 
-export const Create = async ( param : iCreate ) => {
+export const createPost = async ( param : iCreate ) => {
     try {
         const response = await client.post(`${PREFIX}/create`, param);
         return response.data;

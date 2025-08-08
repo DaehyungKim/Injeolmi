@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { BoardList, getList } from '@/features/guest-board';
-import styles from './page.module.css';
 
 const ListPage = async ({ searchParams }: { searchParams: { page?: string } }) => {
     const _searchParams = await Promise.resolve(searchParams);
@@ -16,8 +15,8 @@ const ListPage = async ({ searchParams }: { searchParams: { page?: string } }) =
     return (
         <div>
             <BoardList {...initialProps} />
-            <div className={styles.createButtonWrapper}>
-                <Link href="/guest-board/create" className={styles.createButton}>
+            <div className="mt-1 text-center">
+                <Link href="/guest-board/create" className="border border-[#ccc] p-0.5 bg-[#3b82f6] text-white">
                     글작성
                 </Link>
             </div>
@@ -26,3 +25,4 @@ const ListPage = async ({ searchParams }: { searchParams: { page?: string } }) =
 };
 
 export default ListPage;
+

@@ -9,5 +9,7 @@ export * from './hooks/useBoardList';
 
 export * from './components/BoardList';
 
+export * from './components/BoardDetail';
+
 export * from './components/Pagination';
 

@@ -1,5 +1,5 @@
 import client from '@/api/client';
-import { iRegister } from '@/features/auth/types/auth';
+import { iRegister } from '../types';
 import axios from 'axios'; 
 
 const PREFIX = '/api/auth'; 
@@ -15,7 +15,7 @@ export const registerUser = async (formData: iRegister) => {
     }
 }
 
-export const login = async (formData: { email: string; password: string }) => {
+export const login = async (formData: iRegister) => {
     try {
         const response = await client.post(`${PREFIX}/login`, formData);
         return response.data;

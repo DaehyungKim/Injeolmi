@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import {
-  Create,
+  createPost,
   BoardForm,
   type iCreate
 } from '@/features/guest-board';
@@ -12,7 +12,7 @@ const GuestBoardCreatePage = () => {
 
   const handleCreate = async (formData: iCreate) => {
     try {
-      const response = await Create(formData);
+      const response = await createPost(formData);
       alert('게시글이 작성되었습니다.');
       router.push(`/guest-board/read/${response}`);
     } catch (error) {

@@ -1,5 +1,5 @@
-import { getPost } from '@/features/guest-board/api/boardApi';
-import { BoardDetail } from '@/features/guest-board/components/BoardDetail';
+
+import { getPost, BoardDetail } from '@/features/guest-board';
 
 interface ReadPageProps {
   params: { id: string };
