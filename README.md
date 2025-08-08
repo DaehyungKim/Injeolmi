@@ -471,10 +471,10 @@ export default function ReadPage({ params }: PageProps) {
   return <div>게시글 ID: {id}</div>
 }
 ```
-### 서버 동시 실행
+#### 서버 동시 실행
 
 
-## 1. 설정 (tasks.json 파일 생성)
+### 1. 설정 (tasks.json 파일 생성)
 
 ```
 프로젝트 루트에 .vscode 라는 이름의 폴더를 생성.
@@ -523,7 +523,7 @@ export default function ReadPage({ params }: PageProps) {
 
 ```
 
-## 2. 실행
+### 2. 실행
 Ctrl + Shift + B.
 
 ⚠️ 주의: 이 설정은 Windows의 PowerShell 환경을 기준으로 작성. VS Code의 기본 터미널이 PowerShell이 아닌 경우(예: Git Bash, cmd), tasks.json 파일의 command 부분을 해당 셸에 맞게 수정. (cd backend && npm run dev 와 같이 세미콜론(;)을 &&로 변경)
