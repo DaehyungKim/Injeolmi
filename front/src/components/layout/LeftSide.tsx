@@ -17,6 +17,7 @@ const LeftSide = () => {
                 <Link href="#">설정</Link>
                 <Link href="/guest-board/list?page=1">버려질게시판</Link>
                 <Link href="/auth/login">버려질로그인</Link>
+                <Link href="/auth/register">버려질회원가입</Link>
             </nav>
 
     )
