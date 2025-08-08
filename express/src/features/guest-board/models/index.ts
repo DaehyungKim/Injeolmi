@@ -1,6 +1,6 @@
 import { IModel, IModelResponse } from "@src/core/shared/models";
 
-export interface ICreate extends IModel {
+export interface iCreate extends IModel {
     title: string;
     author: string;
     password: string;
@@ -8,20 +8,20 @@ export interface ICreate extends IModel {
     preImages?: string[];
 }
 
-export interface IPost extends IModelResponse {
+export interface iPost extends IModelResponse {
     title: string;
     author: string;
     content: string;
 }
 
-export interface IUpdate extends IModelResponse {
+export interface iUpdate extends IModelResponse {
     title: string;
     author: string;
     content: string;
     preImages?: string[];
 }
 
-export interface IList {
+export interface iList {
     title?: string;
     page?: number;
     pageSize?: number;
@@ -29,7 +29,7 @@ export interface IList {
     OAuthor?: string;
 }
 
-export interface IListResponse {
+export interface iListResponse {
     items: {
         id: number;
         title: string;

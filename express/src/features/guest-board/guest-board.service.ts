@@ -1,5 +1,5 @@
 import logger from 'jet-logger';
-import { ICreate, IList, IListResponse, IPost, IUpdate } from './models/IGuestBoard';
+import { iCreate, iList, iListResponse, iPost, iUpdate } from './models';
 import { GuestBoard } from './entities/GuestBoard';
 import { Image } from './entities/Image';
 import { AppDataSource } from '@src/core/database/index';
@@ -18,7 +18,7 @@ import createError from 'http-errors';
 ******************************************************************************/
 
 //게시글 생성
-async function create(data: ICreate): Promise<number> {
+async function create(data: iCreate): Promise<number> {
     logger.info('=== 생성 서비스 호출됨 ===');
 
     const repo = AppDataSource.getRepository(GuestBoard);
@@ -37,7 +37,7 @@ async function create(data: ICreate): Promise<number> {
 
 
 //게시글 목록 조회
-async function getList({ page = 1, pageSize = 10, ...rest }: IList): Promise<IListResponse> {
+async function getList({ page = 1, pageSize = 10, ...rest }: iList): Promise<iListResponse> {
     const { OTitle, OAuthor } = rest;
 
 
@@ -59,7 +59,7 @@ async function getList({ page = 1, pageSize = 10, ...rest }: IList): Promise<ILi
 
 
 //게시글 상세 조회
-async function getById(id: number): Promise<IPost> {
+async function getById(id: number): Promise<iPost> {
 
     const repo = AppDataSource.getRepository(GuestBoard);
     const guestBoard = await repo.findOneByOrFail({ id });
@@ -76,7 +76,7 @@ async function getById(id: number): Promise<IPost> {
 
 
 //게시글 수정 전용 조회
-async function getPostForUpdate(id: number, password: string): Promise<IUpdate> {
+async function getPostForUpdate(id: number, password: string): Promise<iUpdate> {
     const repo = AppDataSource.getRepository(GuestBoard);
     const guestBoard = await repo.findOneByOrFail({ id });
     const isMatch = await bcrypt.compare(password, guestBoard.password);
@@ -98,7 +98,7 @@ async function getPostForUpdate(id: number, password: string): Promise<IUpdate> 
 
 //게시글 수정
 
-async function updateById(id: number, data: ICreate): Promise<number> {
+async function updateById(id: number, data: iCreate): Promise<number> {
     const repo = AppDataSource.getRepository(GuestBoard);
     const guestBoard = await repo.findOneByOrFail({ id });
     logger.info(JSON.stringify(data, null, 2));
@@ -198,7 +198,7 @@ export default {
 ******************************************************************************/
 
 // 이미지 처리 함수
-async function imageProcessing(data: ICreate, guestBoard: GuestBoard) {
+async function imageProcessing(data: iCreate, guestBoard: GuestBoard) {
 
     if (data.preImages && data.preImages.length > 0) {
         const imageRepo = AppDataSource.getRepository(Image);

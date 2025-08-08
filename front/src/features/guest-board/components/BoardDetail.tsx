@@ -10,6 +10,7 @@ import { BoardActions } from './BoardActions';
 
 
 
+
 export const BoardDetail = ({ initialDetail }: { initialDetail: iBoardItem }) => {
     const {
         showDeleteModal,

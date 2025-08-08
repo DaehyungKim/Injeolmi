@@ -51,8 +51,16 @@ export const Video = Node.create({
     renderHTML({ HTMLAttributes }) {
         return [
             "video",
-            { controls: "true", autoplay: "true", muted: "true", style: "width: 100%", ...HTMLAttributes },
-            ["source", HTMLAttributes],
+            {
+                controls: true,
+                autoplay: true,
+                muted: true,
+                loop: true,
+                playsinline: true,
+                style: "width: 100%",
+                ...HTMLAttributes,
+            },
+            ["source", { src: HTMLAttributes.src }],
         ];
     },
 

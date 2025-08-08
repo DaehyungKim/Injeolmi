@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import guestBoardService from './guest-board.service';
-import { ICreate, IList } from './models/IGuestBoard';
+import { iCreate, iList } from './models';
 import logger from 'jet-logger';
 
 
@@ -13,7 +13,7 @@ class GuestBoardController {
   // POST /api/guest-board/create - 게시글 생성
     public async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-        const result = await guestBoardService.create(req.body as ICreate);
+        const result = await guestBoardService.create(req.body as iCreate);
             res.status(200).json(result);
         } catch (error) {
             next(error);
@@ -23,7 +23,7 @@ class GuestBoardController {
     // GET /api/guest-board/list - 게시글 목록 조회
     public async getList(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const result = await guestBoardService.getList(req.query as unknown as IList);
+            const result = await guestBoardService.getList(req.query as iList);
             res.status(200).json(result);
         } catch (error) {
             next(error);
@@ -60,7 +60,7 @@ class GuestBoardController {
     public async updateById(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const { id } = req.params;
-            const data = req.body as ICreate;
+            const data = req.body as iCreate;
             const result = await guestBoardService.updateById(Number(id), data);
             res.status(200).json(result);
         } catch (error) {
