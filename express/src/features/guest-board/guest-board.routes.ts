@@ -1,7 +1,6 @@
 import { Router } from 'express';
-import { upload } from '@src/common/util/multerConfig';
-import guestBoardController from '@src/controllers/guestBoardController';
-
+import { upload } from './utils/multerConfig';
+import guestBoardController from './guest-board.controller';
 
 
 

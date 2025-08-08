@@ -1,8 +1,8 @@
 import logger from 'jet-logger';
-import { AppDataSource } from './dataSource';
-import ENV from '@src/common/constants/ENV';
+import { AppDataSource } from './core/database';
+import ENV from '@src/core/shared/constants/ENV';
 import server from './server';
-import { initializeSchedulers } from './schedulers/schedulers';
+import { initializeSchedulers } from './features/guest-board/guest-board.scheduler';
 
 
 /******************************************************************************

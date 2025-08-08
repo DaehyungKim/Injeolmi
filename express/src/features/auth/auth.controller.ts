@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import logger from 'jet-logger';
-import AuthService from '@src/services/auth/authService';
+import authService from './auth.service';
 import jwt from 'jsonwebtoken';
 import createError from 'http-errors';
 // import { generateCsrfToken } from '@src/server';
@@ -12,7 +12,7 @@ class AuthController {
     public async register(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             logger.info('사용자 등록 요청:', req.body.email);
-            await AuthService.register(req.body);
+            await authService.register(req.body);
             logger.info('사용자 등록 성공');
             res.status(201).json({ message: '회원가입 성공' });
         } catch (error) {
@@ -26,7 +26,7 @@ class AuthController {
         try {
             logger.info('사용자 로그인 요청:', req.body);
 
-            const user = await AuthService.login(req.body);
+            const user = await authService.login(req.body);
 
             const accessToken = jwt.sign(
                 { userId: user.id, email: user.email },

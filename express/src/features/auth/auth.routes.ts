@@ -1,7 +1,6 @@
 import { Router } from 'express';
-import { upload } from '@src/common/util/multerConfig';
-import authController from '@src/controllers/authController';
-import authenticateToken from '@src/common/util/authenticateToken';
+import authController from './auth.controller';
+import authenticateToken from '@src/core/middlewares/authenticateToken';
 
 
 

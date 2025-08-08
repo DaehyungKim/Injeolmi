@@ -1,7 +1,7 @@
 import logger from 'jet-logger';
 import dayjs from 'dayjs';
 import bcrypt from 'bcrypt';
-import { AppDataSource } from '@src/dataSource';
+import { AppDataSource } from '@src/core/database/index';
 import createError from 'http-errors';
 
 

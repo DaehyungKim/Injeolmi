@@ -7,13 +7,13 @@ import cookieParser from 'cookie-parser';
 import { doubleCsrf } from 'csrf-csrf';
 import BaseRouter from '@src/routes';
 
-import Paths from '@src/common/constants/Paths';
-import ENV from '@src/common/constants/ENV';
-import HttpStatusCodes from '@src/common/constants/HttpStatusCodes';
-import { RouteError } from '@src/common/util/route-errors';
-import { NodeEnvs } from '@src/common/constants';
+import Paths from '@src/core/shared/constants/Paths';
+import ENV from '@src/core/shared/constants/ENV';
+import HttpStatusCodes from '@src/core/shared/constants/HttpStatusCodes';
+import { RouteError } from '@src/core/shared/errors/route-errors';
+import { NodeEnvs } from '@src/core/shared/constants';
 import { EntityNotFoundError } from 'typeorm/error/EntityNotFoundError';
-import { isHttpError } from '@src/common/util/typeGuard';
+import { isHttpError } from '@src/core/shared/utils/typeGuard';
 
 
 const app = express();

@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import GuestBoardRoutes from './guestBoard';
-import authRouter from './auth';
+import guestBoardRouter from '@src/features/guest-board/guest-board.routes';
+import authRouter from '@src/features/auth/auth.routes';
+
 
 
 /******************************************************************************
@@ -10,7 +11,7 @@ import authRouter from './auth';
 const apiRouter = Router();
 
 // 게스트 게시판 라우터 연결
-apiRouter.use('/guest-board', GuestBoardRoutes);
+apiRouter.use('/guest-board', guestBoardRouter);
 apiRouter.use('/auth', authRouter);
 
 

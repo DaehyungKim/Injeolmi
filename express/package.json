@@ -4,9 +4,9 @@
   "scripts": {
     "build": "ts-node ./scripts/build.ts",
     "clean-install": "rm -rf ./node_modules && rm -r package-lock.json && npm i",
-    "dev": "cross-env NODE_ENV=development ts-node-dev --transpile-only --require tsconfig-paths/register ./src",
+    "dev": "cross-env NODE_ENV=development ts-node-dev --transpile-only --require tsconfig-paths/register ./src/app.ts",
     "lint": "eslint .",
-    "start": "cross-env NODE_ENV=production node -r ./config.js ./dist",
+    "start": "cross-env NODE_ENV=production node -r ./config.js ./dist/app.js",
     "test": "cross-env NODE_ENV=test vitest",
     "type-check": "tsc --noEmit"
   },
