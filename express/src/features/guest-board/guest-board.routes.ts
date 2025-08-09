@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { upload } from './utils/multerConfig';
+import awsUpload from '@src/core/middlewares/awsUpload';
 import guestBoardController from './guest-board.controller';
 
 
@@ -28,8 +28,11 @@ guestBoardRouter.put('/update/:id', guestBoardController.updateById);
 // DELETE /api/guest-board/delete/:id - 게시글 삭제
 guestBoardRouter.delete('/delete/:id', guestBoardController.deleteById);
 
+
+
 // Post /api/guest-board/upload - 게시글 이미지 업로드
-guestBoardRouter.post('/upload', upload.single('image'), guestBoardController.uploadImage);
+const uploadBoard = awsUpload('guest-board');
+guestBoardRouter.post('/upload', uploadBoard.single('image'), guestBoardController.uploadImage);
 
 
 /******************************************************************************

@@ -11,7 +11,6 @@ import type { iCreate, iUpdate, GuestBoardFormProps } from '../types';
 import { Video } from '../utils/video';
 
 
-const API_SERVER_HOST = process.env.NEXT_PUBLIC_API_SERVER_HOST!;
 
 export const BoardForm = (props: GuestBoardFormProps) => {
   const { submitButtonText } = props;
@@ -44,9 +43,9 @@ export const BoardForm = (props: GuestBoardFormProps) => {
       if (file && editor) {
         try {
           const response = await imageUpload(file);
-          setForm(prev => ({ ...prev, preImages: [...(prev.preImages || []), response.filePath] }));
-          const imageUrl = API_SERVER_HOST + response.filePath;
-          editor.chain().focus().setResizableImage({ src: imageUrl, width: 200, height: 200, 'data-keep-ratio': true }).run();
+          console.log('이미지 업로드 성공:', response);
+          setForm(prev => ({ ...prev, preImages: [...(prev.preImages || []), response.s3FileUrl] }));
+          editor.chain().focus().setResizableImage({ src: response.s3FileUrl, width: 200, height: 200, 'data-keep-ratio': true }).run();
         } catch (error) {
           console.error('Image upload failed:', error);
           alert(error instanceof Error ? error.message : '이미지 업로드 실패');
@@ -65,9 +64,9 @@ export const BoardForm = (props: GuestBoardFormProps) => {
       if (file && editor) {
         try {
           const response = await imageUpload(file);
-          setForm(prev => ({ ...prev, preImages: [...(prev.preImages || []), response.filePath] }));
-          const imageUrl = API_SERVER_HOST + response.filePath;
-          editor?.commands.setVideo(imageUrl);
+          setForm(prev => ({ ...prev, preImages: [...(prev.preImages || []), response.s3FileUrl] }));
+          console.log('비디오 업로드 성공:' + form.preImages);
+          editor?.commands.setVideo(response.s3FileUrl);
         } catch (error) {
           console.error('Video upload failed:', error);
           alert(error instanceof Error ? error.message : '비디오 업로드 실패');
@@ -79,6 +78,7 @@ export const BoardForm = (props: GuestBoardFormProps) => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Form submitted:', form);
     
     if (props.mode === 'create') {
       if (!form.title || !form.author || !('password' in form && form.password) || !form.content) {

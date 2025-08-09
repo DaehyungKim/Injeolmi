@@ -1,24 +1,20 @@
+import logger from 'jet-logger';
+
 export function extractImageUrl(content: string): string[] {
-    const imageUrls: string[] = [];
-    const regex = /<img[^>]*?src="([^"]*)"[^>]*?>/g;
-    const regexVideo = /<video[^>]*?src="([^"]*)"[^>]*?>/g;
+    console.log('extractImageUrl called with content:', content);
+    const mediaUrls: string[] = [];
+    const urlRegex = /src="(https?:\/\/[^"]+)"/g;
 
     let match: RegExpExecArray | null;
-    while ((match = regex.exec(content)) !== null) {
-        const fullUrl = match[1];
-        const pathMatch = /\/uploads\/[^"]+/.exec(fullUrl);
-        if (pathMatch) {
-            imageUrls.push(pathMatch[0]);
-        }
+    while ((match = urlRegex.exec(content)) !== null) {
+        const url = match[1];
+        logger.info(`추출된 S3 URL: ${url}`);
+        mediaUrls.push(url);
     }
+    logger.info(mediaUrls);
+    logger.info(content);
 
-    while ((match = regexVideo.exec(content)) !== null) {
-    const fullUrl = match[1];
-    const pathMatch = /\/uploads\/[^"]+/.exec(fullUrl);
-    if (pathMatch) {
-            imageUrls.push(pathMatch[0]);
-        }
-    }
+    
 
-    return imageUrls;
+    return mediaUrls;
 }

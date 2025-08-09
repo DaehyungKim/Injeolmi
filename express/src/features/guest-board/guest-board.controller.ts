@@ -89,10 +89,12 @@ class GuestBoardController {
                 res.status(400).json({ error: '파일이 업로드되지 않았습니다.' });
                 return;
             }
-            const filePath = `/uploads/guest-board/image/${req.file.filename}`;
-            const originalName = req.file.originalname;
-            await guestBoardService.preUploadImage(filePath, originalName);
-            res.status(200).json({ filePath });
+            const file = req.file as Express.MulterS3.File;
+            const s3FileUrl = file.location;
+            const originalName = file.originalname;
+            logger.info(`이미지 업로드 성공: ${s3FileUrl}, 원본 파일명: ${originalName}`);
+            await guestBoardService.preUploadImage(s3FileUrl, originalName);
+            res.status(200).json({ s3FileUrl });
         } catch (error) {
             return next(error);
         }
