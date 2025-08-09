@@ -40,7 +40,7 @@ export const BoardDetail = ({ initialDetail }: { initialDetail: iBoardItem }) =>
                 <BoardContent content={initialDetail.content} />
             </div>
 
-            <BoardActions id={Number(initialDetail.id)} onDelete={openDeleteModal} currentPage={currentPage}/>
+            <BoardActions id={initialDetail.id} onDelete={openDeleteModal} currentPage={currentPage}/>
 
             {showDeleteModal && (
                 <Modal

@@ -1,9 +1,11 @@
-import MainPage from "@/features/main-page/components/MainPage";
+import { Story, FeedItem } from "@/features/main-page";
+
 
 export default function Home() {
   return (
-    <div>
-      <MainPage />
+    <div className="">
+            <Story />
+            <FeedItem />
     </div>
   );
 }
