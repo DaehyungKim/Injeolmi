@@ -91,7 +91,7 @@ class GuestBoardController {
             }
             const file = req.file as Express.MulterS3.File;
             const s3FileUrl = file.location;
-            const originalName = file.originalname;
+            const originalName = Buffer.from(file.originalname, 'latin1').toString('utf8');
             logger.info(`이미지 업로드 성공: ${s3FileUrl}, 원본 파일명: ${originalName}`);
             await guestBoardService.preUploadImage(s3FileUrl, originalName);
             res.status(200).json({ s3FileUrl });
