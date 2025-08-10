@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 
 const entityPaths = [
@@ -25,4 +26,6 @@ export const AppDataSource = new DataSource({
     __dirname + '/../../features/**/entities/*.{ts,js}', 
   ],
   subscribers: [],
+  namingStrategy: new SnakeNamingStrategy(),
+
 });

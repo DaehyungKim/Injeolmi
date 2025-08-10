@@ -12,11 +12,6 @@ export const useBoardDetail = (detail: iBoardItem) => {
 
 
     
-
-    const handleUpdate = () => {
-        router.push(`/guest-board/update/${detail.id}`);
-    };
-
     const handleDelete = async () => {
         if (!password) {
             alert('비밀번호를 입력해주세요.');
@@ -45,7 +40,6 @@ export const useBoardDetail = (detail: iBoardItem) => {
         showDeleteModal,
         password,
         setPassword,
-        handleUpdate,
         handleDelete,
         openDeleteModal,
         closeDeleteModal,

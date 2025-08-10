@@ -16,7 +16,6 @@ export const BoardDetail = ({ initialDetail }: { initialDetail: iBoardItem }) =>
         showDeleteModal,
         password,
         setPassword,
-        handleUpdate,
         handleDelete,
         openDeleteModal,
         closeDeleteModal,
