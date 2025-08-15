@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { House, Send, Compass, Search, FolderPlus, Bell, LayoutGrid, UserRound, Pencil, Settings } from 'lucide-react';
+import { Logout } from "@/features/auth" 
 
-const LeftSide = () => {
+export const LeftSide = () => {
     return (
         
-            <nav className="flex flex-col p-4 gap-4 bg-gray-50 w-[200px] gap-10">
+            <nav className="flex flex-col items-start p-4 gap-10 bg-gray-50 w-[200px] ">
                 <h1 className="text-4xl mb-10">인절미</h1>
                 <Link href="/"><House /></Link>
                 <Link href="#"><Send /></Link>
@@ -17,11 +18,8 @@ const LeftSide = () => {
                 <Link href="#"><Pencil /></Link>
                 <Link href="#"><Settings /></Link>
                 <Link href="/guest-board/list?page=1">버려질게시판</Link>
-                <Link href="/auth/login">버려질로그인</Link>
-                <Link href="/auth/register">버려질회원가입</Link>
+                <Logout />
             </nav>
 
     )
 }
-
-export default LeftSide;

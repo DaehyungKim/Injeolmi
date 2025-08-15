@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import awsUpload from '@src/core/middlewares/awsUpload';
 import guestBoardController from './guest-board.controller';
+import authenticateToken from '@src/core/middlewares/authenticateToken';
+
 
 
 
@@ -9,6 +11,8 @@ import guestBoardController from './guest-board.controller';
 ******************************************************************************/
 
 const guestBoardRouter = Router();
+
+guestBoardRouter.use(authenticateToken);
 
 // POST /api/guest-board/create - 게시글 생성
 guestBoardRouter.post('/create', guestBoardController.create);

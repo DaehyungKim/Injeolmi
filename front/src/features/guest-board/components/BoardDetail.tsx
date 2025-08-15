@@ -1,17 +1,17 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import Modal from '@/components/ui/Modal';
+import { Modal } from '@/components/ui/Modal';
 import { useBoardDetail } from '../hooks/useBoardDetail';
 import { BoardContent } from './BoardContent';
-import type { iBoardItem } from '../types';
+import type { BoardItem } from '../types';
 import { BoardActions } from './BoardActions';
 
 
 
 
 
-export const BoardDetail = ({ initialDetail }: { initialDetail: iBoardItem }) => {
+export const BoardDetail = ({ initialDetail }: { initialDetail: BoardItem }) => {
     const {
         showDeleteModal,
         password,

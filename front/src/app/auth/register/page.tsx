@@ -1,5 +1,5 @@
 import { RegisterForm } from '@/features/auth';
-const Register = () => {
+export default function Register() {
     return (
         <div>
             <RegisterForm />
@@ -7,4 +7,3 @@ const Register = () => {
     )
 }
 
-export default Register;

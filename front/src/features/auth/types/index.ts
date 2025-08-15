@@ -1,9 +1,9 @@
-export interface iRegister {
+export type Register = {
     email: string;
     password: string;
 }
 
-export interface iStrengthInfo {
+export type StrengthInfo = {
     message: string;
     className: string;
 }

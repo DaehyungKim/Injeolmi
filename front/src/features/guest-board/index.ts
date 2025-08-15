@@ -13,3 +13,7 @@ export * from './components/BoardDetail';
 
 export * from './components/Pagination';
 
+export * from './action/updatePostAction'
+
+export * from './action/createPostAction'
+

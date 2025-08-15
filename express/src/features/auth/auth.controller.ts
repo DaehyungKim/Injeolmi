@@ -3,7 +3,9 @@ import logger from 'jet-logger';
 import authService from './auth.service';
 import jwt from 'jsonwebtoken';
 import createError from 'http-errors';
-// import { generateCsrfToken } from '@src/server';
+import { generateAccessToken, generateRefreshToken } from './utils/token';
+import { AuthRequest } from '@src/core/shared/type';
+
 
 
 class AuthController {
@@ -28,11 +30,10 @@ class AuthController {
 
             const user = await authService.login(req.body);
 
-            const accessToken = jwt.sign(
-                { userId: user.id, email: user.email },
-                process.env.JWT_SECRET!,
-                { expiresIn: '15m' }
-            )
+            const accessToken = generateAccessToken({ userId: user.id, email: user.email })
+
+            const refreshToken = generateRefreshToken({ userId: user.id, email: user.email })
+
 
             res.cookie('accessToken', accessToken, {
                 httpOnly: true,
@@ -40,6 +41,13 @@ class AuthController {
                 sameSite: 'lax',
                 maxAge: 15 * 60 * 1000 
             });
+
+            res.cookie('refreshToken', refreshToken, {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'lax',
+                maxAge: 7 * 24 * 60 * 60 * 1000
+            })
 
 
             res.status(200).json({ message: '로그인 성공' });
@@ -50,7 +58,32 @@ class AuthController {
     }
 
     // POST /api/auth/refresh - 리프레시 토큰 갱신
-    public async refreshToken(req: Request, res: Response, next: NextFunction): Promise<void> {
+    public async refreshToken(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
+        const user = req.user;
+
+        if (!user) {
+            throw createError({ message: 'Unauthorized' });
+        }
+
+        const newAccessToken = generateAccessToken({ userId: user.id, email: user.email });
+
+        const NewRefreshToken = generateRefreshToken({ userId: user.id, email: user.email });
+
+        res.cookie('accessToken', newAccessToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'lax',
+            maxAge: 15 * 60 * 1000, 
+        });
+
+        res.cookie('refreshToken', NewRefreshToken, {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'lax',
+                maxAge: 7 * 24 * 60 * 60 * 1000
+        })
+
+
         try {
             logger.info('리프레시 토큰 갱신 요청');
             res.status(200).json({ message: '리프레시 토큰 갱신 성공' });

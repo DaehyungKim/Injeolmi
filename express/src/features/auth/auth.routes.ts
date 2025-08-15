@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import authController from './auth.controller';
 import authenticateToken from '@src/core/middlewares/authenticateToken';
+import authenticateRefreshToken from '@src/core/middlewares/authenticateRefreshToken';
 
 
 
@@ -17,7 +18,7 @@ authRouter.post('/register', authController.register);
 authRouter.post('/login', authController.login);
 
 // POST /apt/auth/refresh - 리프레시 토큰 갱신
-authRouter.post('/refresh', authController.refreshToken);
+authRouter.post('/refresh', authenticateRefreshToken, authController.refreshToken);
 
 // POST /api/auth/logout - 사용자 로그아웃
 authRouter.post('/logout', authController.logout);

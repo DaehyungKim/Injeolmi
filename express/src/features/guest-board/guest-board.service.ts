@@ -1,5 +1,5 @@
 import logger from "jet-logger";
-import { iCreate, iList, iListResponse, iPost, iUpdate } from "./models";
+import { Create, List, ListResponse, Post, Update } from "./type";
 import { GuestBoard } from "./entities/GuestBoard";
 import { Image } from "./entities/Image";
 import { AppDataSource } from "@src/core/database/index";
@@ -18,7 +18,7 @@ import s3Client from "@src/core/shared/utils/s3Client";
 ******************************************************************************/
 
 //게시글 생성
-async function create(data: iCreate): Promise<number> {
+async function create(data: Create): Promise<number> {
     logger.info("=== 생성 서비스 호출됨 ===");
 
     const repo = AppDataSource.getRepository(GuestBoard);
@@ -40,7 +40,7 @@ async function getList({
     page = 1,
     pageSize = 10,
     ...rest
-}: iList): Promise<iListResponse> {
+}: List): Promise<ListResponse> {
     const { OTitle, OAuthor } = rest;
 
     const repo = AppDataSource.getRepository(GuestBoard);
@@ -60,7 +60,7 @@ async function getList({
 }
 
 //게시글 상세 조회
-async function getById(id: number): Promise<iPost> {
+async function getById(id: number): Promise<Post> {
     const repo = AppDataSource.getRepository(GuestBoard);
     const guestBoard = await repo.findOneByOrFail({ id });
 
@@ -78,7 +78,7 @@ async function getById(id: number): Promise<iPost> {
 async function getPostForUpdate(
     id: number,
     password: string
-): Promise<iUpdate> {
+): Promise<Update> {
     const repo = AppDataSource.getRepository(GuestBoard);
     const guestBoard = await repo.findOneByOrFail({ id });
     const isMatch = await bcrypt.compare(password, guestBoard.password);
@@ -99,7 +99,7 @@ async function getPostForUpdate(
 
 //게시글 수정
 
-async function updateById(id: number, data: iCreate): Promise<number> {
+async function updateById(id: number, data: Create): Promise<number> {
     const repo = AppDataSource.getRepository(GuestBoard);
     const guestBoard = await repo.findOneByOrFail({ id });
     logger.info(JSON.stringify(data, null, 2));
@@ -228,7 +228,7 @@ export default {
 ******************************************************************************/
 
 // 이미지 처리 함수
-async function imageProcessing(data: iCreate, guestBoard: GuestBoard) {
+async function imageProcessing(data: Create, guestBoard: GuestBoard) {
     if (data.preImages && data.preImages.length > 0) {
         const imageRepo = AppDataSource.getRepository(Image);
         const imageUrls: string[] = extractImageUrl(data.content);

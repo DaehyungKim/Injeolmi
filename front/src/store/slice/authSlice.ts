@@ -4,24 +4,16 @@ import { getCurrentUser, logout } from '@/features/auth/api/authApi';
 
 interface AuthState {
     user: any;
-    isLoading: boolean;
     isAuthenticated: boolean;
-    csrfToken: string | null;
 }
 
 const initialState: AuthState = {
     user: null,
-    isLoading: false,
     isAuthenticated: false,
-    csrfToken: null,
 };
 
-// export const CSRFToken = createAsyncThunk('/auth/csrfToken', async () => {
-//     const token = await getCSRFToken();
-//     return token;
-// })
 
-export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
+export const loginUser = createAsyncThunk('auth/checkAuth', async () => {
     const user = await getCurrentUser();
     return user;
 })
@@ -41,21 +33,18 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(checkAuth.fulfilled, (state, action) => {
+            .addCase(loginUser.fulfilled, (state, action) => {
                 state.user = action.payload;
                 state.isAuthenticated = !!action.payload;
-                state.isLoading = false;
             })
-            .addCase(checkAuth.rejected, (state) => {
+            .addCase(loginUser.rejected, (state) => {
                 state.user = null;
                 state.isAuthenticated = false;
-                state.isLoading = false;
             })
             .addCase(logoutUser.fulfilled, (state) => {
                 state.user = null;
                 state.isAuthenticated = false;
             })
-           
         },
     });
 

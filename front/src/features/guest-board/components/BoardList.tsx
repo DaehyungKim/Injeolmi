@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useBoardList } from '../hooks/useBoardList';
 import { Pagination } from './Pagination';
-import type { iBoardItem, iBoardListInitialProps } from '../types';
+import type { BoardItem, BoardListInitialProps } from '../types';
 
-const columnHelper = createColumnHelper<iBoardItem>();
+const columnHelper = createColumnHelper<BoardItem>();
 
-export const BoardList = (props: iBoardListInitialProps) => {
+export const BoardList = (props: BoardListInitialProps) => {
     const router = useRouter();
     const { list, lastPage, currentPage, isLoading } = useBoardList(props);
 
@@ -22,7 +22,7 @@ export const BoardList = (props: iBoardListInitialProps) => {
         columnHelper.accessor('createdAt', { header: '작성일', cell: info => info.getValue() }),
     ];
 
-    const table = useReactTable<iBoardItem>({
+    const table = useReactTable<BoardItem>({
         data: list,
         columns,
         getCoreRowModel: getCoreRowModel(),

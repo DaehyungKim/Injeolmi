@@ -3,13 +3,13 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getList } from '../api/boardApi';
-import type { iBoardItem, iBoardListInitialProps } from '../types';
+import type { BoardItem, BoardListInitialProps } from '../types';
 
-export const useBoardList = ({ initialList, initialPage, initialLastPage }: iBoardListInitialProps) => {
+export const useBoardList = ({ initialList, initialPage, initialLastPage }: BoardListInitialProps) => {
     const searchParams = useSearchParams();
     const currentPage = parseInt(searchParams.get('page') || '1', 10);
 
-    const [list, setList] = useState<iBoardItem[]>(initialList);
+    const [list, setList] = useState<BoardItem[]>(initialList);
     const [lastPage, setLastPage] = useState<number>(initialLastPage);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 

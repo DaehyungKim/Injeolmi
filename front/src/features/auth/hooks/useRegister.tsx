@@ -1,7 +1,7 @@
 'use client'
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { registerUser } from '../api/authApi';
-import { iStrengthInfo } from '../types';
+import { StrengthInfo } from '../types';
 
 
 // 이메일 정규식
@@ -63,7 +63,7 @@ export const useRegister = () => {
         else setStrength(0);
     };
 
-    const getStrengthInfo = (): iStrengthInfo => {
+    const getStrengthInfo = (): StrengthInfo => {
         switch (strength) {
             case 1: return { message: '보안 수준: 약함', className: 'text-red-600' };
             case 2: return { message: '보안 수준: 중간', className: 'text-orange-500' };

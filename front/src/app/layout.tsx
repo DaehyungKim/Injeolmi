@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import '@/styles/globals.css';
 import StoreProvider from "../store/StoreProvider";
-import LeftSide from "@/components/layout/LeftSide";
-import RightSide from "@/components/layout/RightSide";
+
+import { AppShell } from "@/components/layout/AppShell";
+
 
 
 
@@ -21,12 +22,12 @@ export default function RootLayout({
     <html lang="en">
       <body className="flex min-h-screen">
         <StoreProvider>
-          <LeftSide />
-          <main className="flex-1">
-            {children}
-          </main>
-          <RightSide />
-        
+
+
+            <AppShell>
+              {children}
+            </AppShell>
+
         </StoreProvider>
       </body>
     </html>

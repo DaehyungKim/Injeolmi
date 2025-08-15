@@ -2,20 +2,21 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Modal from '@/components/ui/Modal';
+import { Modal } from '@/components/ui/Modal';
 import {
   getPostForUpdate,
   updatePost,
   BoardForm,
-  type iUpdate
+  updatePostAction,
+  type Update
 } from '@/features/guest-board';
 import { use } from 'react';
 
 
 
-const GuestBoardUpdatePage = ({ params }: { params: Promise<{ id:string }> }) => {
+export default async function GuestBoardUpdatePage({ params }: { params: Promise<{ id:string }> }) {
   const { id } = use(params);
-  const [boardItem, setBoardItem] = useState<iUpdate | null>(null);
+  const [boardItem, setBoardItem] = useState<Update | null>(null);
   const [password, setPassword] = useState("");
   const [showModal, setShowModal] = useState(true);
   const router = useRouter();
@@ -37,11 +38,11 @@ const GuestBoardUpdatePage = ({ params }: { params: Promise<{ id:string }> }) =>
     }
   };
 
-  const handleUpdate = async (formData: iUpdate) => {
+  const handleUpdate = async (formData: Update) => {
     try {
-      const response = await updatePost(formData);
+      const response = await updatePostAction(formData);
       alert('게시글이 수정되었습니다.');
-      router.push(`/guest-board/read/${String(response)}`);
+      router.replace(`/guest-board/read/${String(response)}`);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : '게시글 수정에 실패했습니다.';
       alert(errorMessage);
@@ -72,5 +73,3 @@ const GuestBoardUpdatePage = ({ params }: { params: Promise<{ id:string }> }) =>
     </main>
   );
 };
-
-export default GuestBoardUpdatePage;

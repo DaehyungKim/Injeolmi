@@ -4,8 +4,9 @@ import { login } from '../api/authApi';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/store/store';
-import { checkAuth, logoutUser  } from '@/store/slice/authSlice';
+import { loginUser, logoutUser  } from '@/store/slice/authSlice';
 import { useRouter } from 'next/navigation';
+
 
 export const useAuth = () => {
     const [email, setEmail] = useState<string>('');
@@ -33,7 +34,7 @@ export const useAuth = () => {
         try {
             await login({ email, password });
             alert('로그인 성공');
-            dispatch(checkAuth());
+            dispatch(loginUser());
             router.push('/');
             
         } catch (err) {
@@ -41,9 +42,14 @@ export const useAuth = () => {
         }
     };
 
-    const handleLogout = () => {
-        dispatch(logoutUser());
-        alert('로그아웃 되었습니다.');
+    const handleLogout = async() => {
+        try {
+            await dispatch(logoutUser()).unwrap();
+            router.push('/auth/login');
+        } catch(error) {
+            alert('서버와의 연결이 원활하지 않아 로그아웃에 실패했습니다. 다시 시도해주세요.');
+        }
+        
     }
 
     return {

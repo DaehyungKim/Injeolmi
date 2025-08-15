@@ -1,4 +1,4 @@
-export interface iBoardItem {
+export type BoardItem = {
     id: number;
     title: string;
     author: string;
@@ -7,13 +7,13 @@ export interface iBoardItem {
     updatedAt: string;
 }
 
-export interface iBoardListInitialProps {
-    initialList: iBoardItem[];
+export type BoardListInitialProps = {
+    initialList: BoardItem[];
     initialPage: number;
     initialLastPage: number;
 }
 
-export interface iCreate {
+export type Create = {
     title: string;
     content: string;
     author: string;
@@ -21,13 +21,13 @@ export interface iCreate {
     preImages: string[];
 }
 
-export interface iPaginationProps {
+export type PaginationProps = {
     currentPage: number;
     lastPage: number;
     basePath: string;
 }
 
-export interface iUpdate {
+export type Update = {
     id: number;
     title: string;
     content: string;
@@ -38,33 +38,28 @@ export interface iUpdate {
 }
 
 
-export interface iList {
+export type List = {
     page: number;
     pageSize: number;
     OTitle: string;
     OAuthor: string;
 }
 
-export interface iBoardListProps {
-    list: iBoardItem[];
-    page: number;
-    lastPage: number;
-}
 
-export interface iDetailProps {
-    detail: iBoardItem;
+export type ReadPageProps = {
+    params: { id: string };
 }
 
 export type CreateFormProps = {
     mode: 'create';
-    onSubmit: (data: iCreate) => Promise<void>;
+    onSubmit: (data: Create) => Promise<void>;
     submitButtonText: string;
 };
 
 export type UpdateFormProps = {
     mode: 'update';
-    initialData: iUpdate;
-    onSubmit: (data: iUpdate) => Promise<void>;
+    initialData: Update;
+    onSubmit: (data: Update) => Promise<void>;
     submitButtonText: string;
 };
 

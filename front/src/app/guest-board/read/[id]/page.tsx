@@ -1,13 +1,12 @@
 
 import { getPost, BoardDetail } from '@/features/guest-board';
+import { ReadPageProps } from '@/features/guest-board';
 
-interface ReadPageProps {
-  params: { id: string };
-}
+export default async function ReadPage({ params }: ReadPageProps) {
 
-const ReadPage = async ({ params }: ReadPageProps) => {
   const { id } = await Promise.resolve(params);
   const response = await getPost(id);
+
 
   return (
     <div>
@@ -16,4 +15,3 @@ const ReadPage = async ({ params }: ReadPageProps) => {
   );
 };
 
-export default ReadPage;

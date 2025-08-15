@@ -1,6 +1,7 @@
 'use client';
 
 import { useAuth } from '../hooks/useAuth';
+import Link from 'next/link';
 
 export const LoginForm = () => {
 
@@ -55,6 +56,9 @@ export const LoginForm = () => {
                 </div>
                 <button className="cursor-pointer inline-block w-full bg-[var(--color-primary)] p-4 text-base rounded-md text-white border-0 focus:outline-none active:scale-[0.98] transition-transform;" type="submit">Login</button>
             </form>
+            <div className="mt-5">
+                <Link href="/auth/register">회원가입</Link>
+            </div>
         </div>
     )
 }

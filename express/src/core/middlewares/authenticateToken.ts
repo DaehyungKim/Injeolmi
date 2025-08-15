@@ -1,21 +1,31 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-
-interface AuthRequest extends Request {
-    user?: any;
-}
+import logger from 'jet-logger';
+import createError from 'http-errors';
+import { AuthRequest } from '../shared/type';
 
 const authenticateToken = (req: AuthRequest, res: Response, next: NextFunction) => {
 
-    
+
     const token = req.cookies.accessToken;
 
-    
-    if (!token) return res.status(401).json({ error: '토큰이 없음' });
 
 
-    jwt.verify(token, process.env.JWT_SECRET!, (err: any, user: any) => {
-        if (err) return res.status(403).json({ error: '토큰이 유효하지 않음' });
+
+
+    if (!token) throw createError(401, 'EMPTY_TOKEN');
+
+
+    jwt.verify(token, process.env.JWT_SECRET!, (error: any, user: any) => {
+        if (error) {
+            logger.info(error);
+
+            if (error.name === 'TokenExpiredError') {
+                throw createError(401, 'TOKEN_EXPIRED');
+            }
+
+            throw createError(401, 'INVALID_TOKEN');
+        }
         req.user = user;
         next();
     })

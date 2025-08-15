@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import type { iPaginationProps } from '../types';
+import type { PaginationProps } from '../types';
 
-export const Pagination = ({ currentPage, lastPage, basePath }: iPaginationProps) => {
+export const Pagination = ({ currentPage, lastPage, basePath }: PaginationProps) => {
     
 
     const disabledStyles = 'pointer-events-none cursor-default opacity-50 text-gray-400';

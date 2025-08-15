@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { BoardList, getList } from '@/features/guest-board';
 
-const ListPage = async ({ searchParams }: { searchParams: { page?: string } }) => {
+
+export default async function ListPage ({ searchParams }: { searchParams: { page?: string } }) {
     const _searchParams = await Promise.resolve(searchParams);
     const page = parseInt(_searchParams?.page || '1', 10);
     const response = await getList({ page, pageSize: 10, OTitle: '', OAuthor: '' });
@@ -24,5 +25,5 @@ const ListPage = async ({ searchParams }: { searchParams: { page?: string } }) =
     );
 };
 
-export default ListPage;
+
 

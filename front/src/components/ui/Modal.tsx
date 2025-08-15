@@ -9,7 +9,7 @@ interface ModalProps {
     onCancel: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ password, setPassword, onConfirm, onCancel }) => {
+export const Modal: React.FC<ModalProps> = ({ password, setPassword, onConfirm, onCancel }) => {
     return (
         
         <div className="fixed inset-0 flex items-center justify-center bg-black/30 z-50">
@@ -48,5 +48,3 @@ const Modal: React.FC<ModalProps> = ({ password, setPassword, onConfirm, onCance
         </div>
     );
 };
-
-export default Modal;

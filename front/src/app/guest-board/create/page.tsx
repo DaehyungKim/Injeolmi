@@ -2,19 +2,20 @@
 
 import { useRouter } from 'next/navigation';
 import {
-  createPost,
   BoardForm,
-  type iCreate
+  createPostAction,
+  type Create
 } from '@/features/guest-board';
 
-const GuestBoardCreatePage = () => {
+
+export default function GuestBoardCreatePage() {
   const router = useRouter();
 
-  const handleCreate = async (formData: iCreate) => {
+  const handleCreate = async (formData: Create) => {
     try {
-      const response = await createPost(formData);
+      const response = await createPostAction(formData);
       alert('게시글이 작성되었습니다.');
-      router.push(`/guest-board/read/${response}`);
+      router.replace(`/guest-board/read/${response}`);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : '게시글 작성에 실패했습니다.';
       alert(errorMessage);
@@ -32,4 +33,3 @@ const GuestBoardCreatePage = () => {
   );
 };
 
-export default GuestBoardCreatePage;

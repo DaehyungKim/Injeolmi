@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { deletePost } from '../api/boardApi';
-import type { iBoardItem } from '../types';
+import type { BoardItem } from '../types';
+import { deletePostAction } from '../action/deletePostAction';
 
-export const useBoardDetail = (detail: iBoardItem) => {
+
+export const useBoardDetail = (detail: BoardItem) => {
     const router = useRouter();
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [password, setPassword] = useState('');
@@ -18,9 +20,9 @@ export const useBoardDetail = (detail: iBoardItem) => {
             return;
         }
         try {
-            await deletePost(detail.id, password);
+            await deletePostAction(detail.id, password)
             alert('게시글이 삭제되었습니다.');
-            router.push('/guest-board/list');
+            router.replace('/guest-board/list');
         } catch (error) {
             alert(error instanceof Error ? error.message : '게시글 삭제에 실패했습니다.');
         } finally {

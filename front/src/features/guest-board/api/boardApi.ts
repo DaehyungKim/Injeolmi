@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { iCreate, iList, iUpdate } from '@/features/guest-board/types';
+import { Create, List, Update } from '@/features/guest-board/types';
 import client from '../../../api/client'; 
+
 
 const PREFIX = '/api/guest-board';  
 
-export const createPost = async ( param : iCreate ) => {
+export const createPost = async ( param : Create ) => {
     try {
         const response = await client.post(`${PREFIX}/create`, param);
         return response.data;
@@ -15,14 +16,17 @@ export const createPost = async ( param : iCreate ) => {
     }
 }
 
-export const getList = async ( param: iList ) => {
+export const getList = async ( param: List ) => {
     try {
+        
         const response = await client.get(`${PREFIX}/list`, { params: param });
         return response.data;
     } catch (error) {
         if (axios.isAxiosError(error)) {
+            console.log(error)
             throw new Error(error.response?.data.error);
-    }
+        }
+        
     }
 }
 
@@ -51,7 +55,7 @@ export const getPostForUpdate = async ( id: number, password: string ) => {
 }
 
 
-export const updatePost = async  ( param : iUpdate ) => {
+export const updatePost = async  ( param : Update ) => {
     try {
         const response = await client.put(`${PREFIX}/update/${param.id}`, param);
         return response.data;

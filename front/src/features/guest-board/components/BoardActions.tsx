@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import styles from './BoardDetail.module.css';
 
 
 export const BoardActions = ({ id, onDelete, currentPage }: { id: Number; onDelete: () => void; currentPage: string }) => {

@@ -1,5 +1,5 @@
 
-const RightSide = () => {
+export const RightSide = () => {
     return (
         
             <div className="flex flex-col gap-20 bg-gray-50">

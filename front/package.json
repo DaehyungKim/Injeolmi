@@ -23,6 +23,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-redux": "^9.2.0",
+    "redux-persist": "^6.0.0",
     "swiper": "^11.2.10",
     "tiptap-extension-resizable-image": "^2.0.0",
     "tiptap-extension-resize-image": "^1.2.3"
@@ -34,6 +35,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/redux-persist": "^4.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.4.2",
     "tailwindcss": "^4",
