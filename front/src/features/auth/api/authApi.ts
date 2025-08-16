@@ -26,6 +26,17 @@ export const login = async (formData: Register) => {
     }
 }
 
+export const getCSRFToken = async () => {
+    try {
+        const response = await client.get(`${PREFIX}/csrf-token`);
+        return response.data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            throw new Error(error.response?.data.error);
+        }
+    }
+}
+
 export const getCurrentUser = async () => {
     try {
         const response = await client.get(`${PREFIX}/me`);

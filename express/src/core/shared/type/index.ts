@@ -15,3 +15,7 @@ export type AuthRequest = Request & {
   user?: any
 }
 
+export type UserPayload = {
+    userId: string; 
+    email: string;
+}

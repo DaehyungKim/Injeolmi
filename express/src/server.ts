@@ -6,7 +6,6 @@ import logger from 'jet-logger';
 import cookieParser from 'cookie-parser';
 import { doubleCsrf } from 'csrf-csrf';
 import BaseRouter from '@src/routes';
-
 import Paths from '@src/core/shared/constants/Paths';
 import ENV from '@src/core/shared/constants/ENV';
 import HttpStatusCodes from '@src/core/shared/constants/HttpStatusCodes';
@@ -14,32 +13,12 @@ import { RouteError } from '@src/core/shared/errors/route-errors';
 import { NodeEnvs } from '@src/core/shared/constants';
 import { EntityNotFoundError } from 'typeorm/error/EntityNotFoundError';
 import { isHttpError } from '@src/core/shared/utils/typeGuard';
+import { jwtMiddleware } from './core/middlewares/jwt-middleware';
+import { doubleCsrfProtection, invalidCsrfTokenError } from './core/middlewares/csrf';
 
 
 const app = express();
 
-// CSRF 설정
-// const {
-//   invalidCsrfTokenError, // CSRF 토큰 에러 핸들러
-//   doubleCsrfProtection, // CSRF 보호 미들웨어
-//   generateCsrfToken, // CSRF 토큰 생성 함수
-// } = doubleCsrf({
-//   getSecret: () => 'super-secret-key', // 운영환경에서는 환경변수로 관리
-//   getSessionIdentifier: (req) => req.headers['x-session-id'] as string || 'default-session', // 세션 식별자
-//   cookieName: 'x-csrf-token',
-//   cookieOptions: {
-//     httpOnly: true,
-//     secure: true, // HTTPS에서만 사용
-//     sameSite: 'strict',
-//     maxAge: 60 * 60 * 1000,  // 1시간 동안 유효
-//   },
-//   size: 64,
-//   ignoredMethods: ['GET', 'HEAD', 'OPTIONS'],
-// });
-
-
-
-// **** 미들웨어 **** //
 
 
 // CORS 설정
@@ -54,8 +33,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
-// CSRF 보호 미들웨어 적용 (API 라우트에만)
-// app.use('/api', doubleCsrfProtection);
+
+
+// Jwt 토큰 검증
+app.use(jwtMiddleware); 
+
+// CSRF 보호 미들웨어 적용
+app.use('/api', doubleCsrfProtection);
 
 
 //다운로드
@@ -88,9 +72,9 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
   logger.info('에러 핸들러 호출됨');
   
   // CSRF 토큰 에러 처리
-  // if (err === invalidCsrfTokenError) {
-  //   return res.status(403).json({ error: 'CSRF 토큰이 유효하지 않습니다' });
-  // }
+  if (err === invalidCsrfTokenError) {
+    return res.status(403).json({ error: 'CSRF 토큰이 유효하지 않습니다' });
+  }
   
   if (err instanceof EntityNotFoundError) {
     return res.status(404).json({ error: '리소스를 찾을 수 없습니다'});
@@ -114,6 +98,5 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
 
 
 
-// export { generateCsrfToken };
 
 export default app;

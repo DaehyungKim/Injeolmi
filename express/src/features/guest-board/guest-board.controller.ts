@@ -12,6 +12,7 @@ class GuestBoardController {
 
   // POST /api/guest-board/create - 게시글 생성
     public async create(req: Request, res: Response, next: NextFunction): Promise<void> {
+
     try {
         const result = await guestBoardService.create(req.body as Create);
             res.status(200).json(result);

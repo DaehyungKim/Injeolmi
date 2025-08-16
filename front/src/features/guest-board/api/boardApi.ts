@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Create, List, Update } from '@/features/guest-board/types';
-import client from '../../../api/client'; 
+import client from '@/api/client';
 
 
 const PREFIX = '/api/guest-board';  

@@ -14,7 +14,7 @@ import { use } from 'react';
 
 
 
-export default async function GuestBoardUpdatePage({ params }: { params: Promise<{ id:string }> }) {
+export default function GuestBoardUpdatePage({ params }: { params: Promise<{ id:string }> }) {
   const { id } = use(params);
   const [boardItem, setBoardItem] = useState<Update | null>(null);
   const [password, setPassword] = useState("");
