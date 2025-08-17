@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { API_SERVER_HOST } from './config';
 import { store } from '@/store/store';
+import { CSRFToken } from '@/store/slice/authSlice';
+import { getCSRFToken } from '@/features/auth';
 
 const baseURL = typeof window === 'undefined' ? API_SERVER_HOST : '';
 const CSRF_TOKEN_URL = '/api/auth/csrf-token';
@@ -46,6 +48,33 @@ client.interceptors.request.use(async (config) => {
     }
     return config;
 });
+
+client.interceptors.response.use(
+    (response) => {
+        if  (typeof window !== 'undefined') {
+            const newCsrfToken = response.headers['x-csrf-token'];
+            if (newCsrfToken) {
+                store.dispatch(CSRFToken());
+            }
+        }
+        return response
+    },
+    async (error) => {
+        if (typeof window !== 'undefined' &&
+            error.response?.status === 403 &&
+            error.response?.error === 'invalidCsrfTokenError') {
+
+                try {
+                    await store.dispatch(CSRFToken());
+                    const originalRequest = error.config;
+                    return client.request(originalRequest);
+                } catch (retryError) {
+                    console.error('CSRF 토큰 갱신 실패:', retryError);
+                }
+        }
+        return Promise.reject(error);
+    }
+)
 
 
 export default client;

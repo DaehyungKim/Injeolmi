@@ -73,7 +73,7 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
   
   // CSRF 토큰 에러 처리
   if (err === invalidCsrfTokenError) {
-    return res.status(403).json({ error: 'CSRF 토큰이 유효하지 않습니다' });
+    return res.status(403).json({ error: 'invalidCsrfTokenError' });
   }
   
   if (err instanceof EntityNotFoundError) {

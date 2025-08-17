@@ -4,7 +4,11 @@ import authService from './auth.service';
 import createError from 'http-errors';
 import { AuthRequest } from '@src/core/shared/type';
 import { generateCsrfToken } from '@src/core/middlewares/csrf';
-import { generateAccessToken, generateRefreshToken } from '@src/core/shared/utils/token';
+import { generateAccessToken, generateRefreshToken, setTokenCookie, removeCookie } from '@src/core/shared/utils/token';
+import { remove } from 'fs-extra';
+
+
+
 
 class AuthController {
     
@@ -29,25 +33,7 @@ class AuthController {
 
             const user = await authService.login(req.body);
 
-            const accessToken = generateAccessToken({ userId: user.id, email: user.email })
-
-            const refreshToken = generateRefreshToken({ userId: user.id, email: user.email })
-
-
-            res.cookie('accessToken', accessToken, {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'lax',
-                maxAge: 15 * 60 * 1000 
-            });
-
-            res.cookie('refreshToken', refreshToken, {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'lax',
-                maxAge: 7 * 24 * 60 * 60 * 1000
-            })
-
+            setTokenCookie(res, user.id, user.email);
 
             res.status(200).json({ email: user.id });
         } catch (error) {
@@ -62,25 +48,8 @@ class AuthController {
         try {
             logger.info('사용자 로그아웃 요청');
 
-            res.clearCookie('accessToken', {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'lax',
-                path: '/',
-            });
-            res.clearCookie('refreshToken', {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'lax',
-                path: '/',
-            });
+            removeCookie(res);
 
-            res.clearCookie('x-csrfToken', {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'lax',
-                path: '/',
-            });
             logger.info('사용자 로그아웃 성공');
             res.status(200).json({ message: '로그아웃 성공' });
         } catch (error) {
