@@ -8,13 +8,15 @@ const EXCLUDED_PATHS = [
     '/api/auth/login',
     '/api/auth/register',
     '/api/auth/refresh',
-    '/api/auth/csrf-token'
+    '/api/auth/csrf-token',
+    
 ];
 
 
 
 export const jwtMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
     logger.info(req.path);
+    logger.info("하이하이하이!!!")
     if (EXCLUDED_PATHS.includes(req.path)) {
         return next();
     }

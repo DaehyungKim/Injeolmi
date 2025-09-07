@@ -8,7 +8,7 @@ export const LeftSide = () => {
             <nav className="flex flex-col items-start p-4 gap-10 bg-gray-50 w-[200px] ">
                 <h1 className="text-4xl mb-10">인절미</h1>
                 <Link href="/"><House /></Link>
-                <Link href="#"><Send /></Link>
+                <Link href="/chat"><Send /></Link>
                 <Link href="#"><Compass /></Link>
                 <Link href="#"><Search /></Link>
                 <Link href="#"><FolderPlus /></Link>

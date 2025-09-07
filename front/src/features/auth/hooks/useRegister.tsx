@@ -2,6 +2,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { registerUser } from '../api/authApi';
 import { StrengthInfo } from '../types';
+import { useRouter } from 'next/navigation';
 
 
 // 이메일 정규식
@@ -16,6 +17,8 @@ export const useRegister = () => {
     const [passwordError, setPasswordError] = useState<string>('');
 
     const [strength, setStrength] = useState<number>(0);
+
+    const router = useRouter();
 
     const handleEmailChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const newEmail = e.target.value;
@@ -85,8 +88,7 @@ export const useRegister = () => {
             await registerUser({ email, password })
                 .then(() => {
                     alert('회원가입이 완료되었습니다.');
-                    setEmail('');
-                    setPassword('');
+                    router.replace('/auth/login');
                 })
                 .catch((error: Error) => {
                     alert(error.message);

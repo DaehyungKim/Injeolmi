@@ -2,14 +2,14 @@
 
 import React from "react";
 
-interface ModalProps {
+type ModalProps = {
     password: string;
     setPassword: (pw: string) => void;
     onConfirm: () => void;
     onCancel: () => void;
 }
 
-export const Modal: React.FC<ModalProps> = ({ password, setPassword, onConfirm, onCancel }) => {
+export const Modal = ({ password, setPassword, onConfirm, onCancel }: ModalProps ) => {
     return (
         
         <div className="fixed inset-0 flex items-center justify-center bg-black/30 z-50">
